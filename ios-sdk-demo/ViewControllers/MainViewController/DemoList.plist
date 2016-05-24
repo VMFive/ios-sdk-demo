@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>sectionTitle</key>
+		<string>SDK Information</string>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>rowText</key>
+				<string>version</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionTitle</key>
+		<string>Add ads in your tableview</string>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>rowText</key>
+				<string>CellProviderSample1</string>
+				<key>action</key>
+				<string>CellProviderSample1ViewController</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionTitle</key>
+		<string>Use nativeAd fit your design</string>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>rowText</key>
+				<string>NativeAdSample1</string>
+				<key>action</key>
+				<string>NativeAdSample1ViewController</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

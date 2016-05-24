@@ -13,6 +13,7 @@
 
 @interface MainViewController ()
 
+@property (nonatomic, strong) NSArray *items;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -22,122 +23,31 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.items.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"SDK Information";
-            
-        case 1:
-            return @"Add ads in your tableview";
-            
-        case 2:
-            return @"Use nativeAd fit your design";
-            
-        default:
-            return @"";
-    }
+    return self.items[section][@"sectionTitle"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return 1;
-            
-        case 1:
-            return 1;
-            
-        case 2:
-            return 1;
-            
-        default:
-            return 0;
-    }
+    return [self.items[section][@"rows"] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    switch (indexPath.section) {
-        case 0:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = [VANativeAd version];
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-        }
-            
-        case 1:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"CellProviderSample1";
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-        }
-            
-        case 2:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"NativeAdSample1";
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-        }
-            
-        default:
-            break;
-    }
+    NSString *rowText = self.items[indexPath.section][@"rows"][indexPath.row][@"rowText"];
+    cell.textLabel.text = [rowText isEqualToString:@"version"] ? [VANativeAd version] : rowText;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 1:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    [self.navigationController pushViewController:[CellProviderSample1ViewController new] animated:YES];
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-        }
-            
-        case 2:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    [self.navigationController pushViewController:[NativeAdSample1ViewController new] animated:YES];
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-        }
-            
-        default:
-            break;
+    Class aClass = NSClassFromString(self.items[indexPath.section][@"rows"][indexPath.row][@"action"]);
+    if (aClass) {
+        [self.navigationController pushViewController:[aClass new] animated:YES];
     }
 }
 
@@ -147,6 +57,7 @@
     [super viewDidLoad];
     
     self.title = @"Hello Demos";
+    self.items = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DemoList" ofType:@"plist"]];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
 }
 
