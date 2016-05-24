@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import <VMFiveAdNetwork/VMFiveAdNetwork.h>
 #import "CellProviderSample1ViewController.h"
+#import "NativeAdSample1ViewController.h"
 
 @interface MainViewController ()
 
@@ -21,7 +22,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -31,6 +32,9 @@
             
         case 1:
             return @"Add ads in your tableview";
+            
+        case 2:
+            return @"Use nativeAd fit your design";
             
         default:
             return @"";
@@ -43,6 +47,9 @@
             return 1;
             
         case 1:
+            return 1;
+            
+        case 2:
             return 1;
             
         default:
@@ -80,6 +87,19 @@
             break;
         }
             
+        case 2:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"NativeAdSample1";
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+        }
+            
         default:
             break;
     }
@@ -95,6 +115,19 @@
             switch (indexPath.row) {
                 case 0:
                     [self.navigationController pushViewController:[CellProviderSample1ViewController new] animated:YES];
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+        }
+            
+        case 2:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    [self.navigationController pushViewController:[NativeAdSample1ViewController new] animated:YES];
                     break;
                     
                 default:
