@@ -8,8 +8,6 @@
 
 #import "MainViewController.h"
 #import <VMFiveAdNetwork/VMFiveAdNetwork.h>
-#import "CellProviderSample1ViewController.h"
-#import "NativeAdSample1ViewController.h"
 
 @interface MainViewController ()
 
