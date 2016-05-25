@@ -54,6 +54,12 @@
 				<key>action</key>
 				<string>BannerSampleViewController</string>
 			</dict>
+			<dict>
+				<key>rowText</key>
+				<string>CardSample</string>
+				<key>action</key>
+				<string>CardSampleViewController</string>
+			</dict>
 		</array>
 	</dict>
 </array>

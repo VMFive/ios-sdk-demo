@@ -14,6 +14,8 @@
 		1C2CD7951CF5378E00CEE8AD /* NativeAdSample3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD7931CF5378E00CEE8AD /* NativeAdSample3ViewController.xib */; };
 		1C2CD79A1CF53B1800CEE8AD /* BannerSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7981CF53B1800CEE8AD /* BannerSampleViewController.m */; };
 		1C2CD79B1CF53B1800CEE8AD /* BannerSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD7991CF53B1800CEE8AD /* BannerSampleViewController.xib */; };
+		1C2CD7A01CF541BB00CEE8AD /* CardSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD79E1CF541BB00CEE8AD /* CardSampleViewController.m */; };
+		1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD79F1CF541BB00CEE8AD /* CardSampleViewController.xib */; };
 		1C4CBD3A1CF404C100D5F62F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD391CF404C100D5F62F /* main.m */; };
 		1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD3C1CF404C100D5F62F /* AppDelegate.m */; };
 		1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4CBD441CF404C100D5F62F /* Assets.xcassets */; };
@@ -46,6 +48,9 @@
 		1C2CD7971CF53B1800CEE8AD /* BannerSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerSampleViewController.h; sourceTree = "<group>"; };
 		1C2CD7981CF53B1800CEE8AD /* BannerSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerSampleViewController.m; sourceTree = "<group>"; };
 		1C2CD7991CF53B1800CEE8AD /* BannerSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BannerSampleViewController.xib; sourceTree = "<group>"; };
+		1C2CD79D1CF541BB00CEE8AD /* CardSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSampleViewController.h; sourceTree = "<group>"; };
+		1C2CD79E1CF541BB00CEE8AD /* CardSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSampleViewController.m; sourceTree = "<group>"; };
+		1C2CD79F1CF541BB00CEE8AD /* CardSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardSampleViewController.xib; sourceTree = "<group>"; };
 		1C4CBD351CF404C100D5F62F /* ios-sdk-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-sdk-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4CBD391CF404C100D5F62F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C4CBD3B1CF404C100D5F62F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -136,6 +141,16 @@
 			path = BannerSample;
 			sourceTree = "<group>";
 		};
+		1C2CD79C1CF541A700CEE8AD /* CardSample */ = {
+			isa = PBXGroup;
+			children = (
+				1C2CD79D1CF541BB00CEE8AD /* CardSampleViewController.h */,
+				1C2CD79E1CF541BB00CEE8AD /* CardSampleViewController.m */,
+				1C2CD79F1CF541BB00CEE8AD /* CardSampleViewController.xib */,
+			);
+			path = CardSample;
+			sourceTree = "<group>";
+		};
 		1C4CBD2C1CF404C100D5F62F = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +212,7 @@
 				1C7335D51CF465150040D7D6 /* NativeAdSample2 */,
 				1C2CD7901CF5376C00CEE8AD /* NativeAdSample3 */,
 				1C2CD7961CF53AF400CEE8AD /* BannerSample */,
+				1C2CD79C1CF541A700CEE8AD /* CardSample */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -341,6 +357,7 @@
 				1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */,
 				1CD109781CF4242600B454D2 /* SampleView1.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
+				1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */,
 				1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */,
 				1C881FA41CF41E8400335788 /* CellProviderSample1ViewController.xib in Resources */,
 			);
@@ -403,6 +420,7 @@
 			files = (
 				1CD1097D1CF430AD00B454D2 /* NativeAdSample1ViewController.m in Sources */,
 				1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */,
+				1C2CD7A01CF541BB00CEE8AD /* CardSampleViewController.m in Sources */,
 				1C2CD79A1CF53B1800CEE8AD /* BannerSampleViewController.m in Sources */,
 				1C881F9D1CF4065E00335788 /* MainViewController.m in Sources */,
 				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
