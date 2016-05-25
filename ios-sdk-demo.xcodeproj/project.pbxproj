@@ -10,6 +10,8 @@
 		1C2CD7891CF5246100CEE8AD /* SampleView3.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7881CF5246100CEE8AD /* SampleView3.m */; };
 		1C2CD78E1CF532C800CEE8AD /* CellProviderSample2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */; };
 		1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */; };
+		1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7921CF5378E00CEE8AD /* NativeAdSample3ViewController.m */; };
+		1C2CD7951CF5378E00CEE8AD /* NativeAdSample3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD7931CF5378E00CEE8AD /* NativeAdSample3ViewController.xib */; };
 		1C4CBD3A1CF404C100D5F62F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD391CF404C100D5F62F /* main.m */; };
 		1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD3C1CF404C100D5F62F /* AppDelegate.m */; };
 		1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4CBD441CF404C100D5F62F /* Assets.xcassets */; };
@@ -36,6 +38,9 @@
 		1C2CD78B1CF532C800CEE8AD /* CellProviderSample2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellProviderSample2ViewController.h; sourceTree = "<group>"; };
 		1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellProviderSample2ViewController.m; sourceTree = "<group>"; };
 		1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellProviderSample2ViewController.xib; sourceTree = "<group>"; };
+		1C2CD7911CF5378E00CEE8AD /* NativeAdSample3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdSample3ViewController.h; sourceTree = "<group>"; };
+		1C2CD7921CF5378E00CEE8AD /* NativeAdSample3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdSample3ViewController.m; sourceTree = "<group>"; };
+		1C2CD7931CF5378E00CEE8AD /* NativeAdSample3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdSample3ViewController.xib; sourceTree = "<group>"; };
 		1C4CBD351CF404C100D5F62F /* ios-sdk-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-sdk-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4CBD391CF404C100D5F62F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C4CBD3B1CF404C100D5F62F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +111,16 @@
 			path = CellProviderSample2;
 			sourceTree = "<group>";
 		};
+		1C2CD7901CF5376C00CEE8AD /* NativeAdSample3 */ = {
+			isa = PBXGroup;
+			children = (
+				1C2CD7911CF5378E00CEE8AD /* NativeAdSample3ViewController.h */,
+				1C2CD7921CF5378E00CEE8AD /* NativeAdSample3ViewController.m */,
+				1C2CD7931CF5378E00CEE8AD /* NativeAdSample3ViewController.xib */,
+			);
+			path = NativeAdSample3;
+			sourceTree = "<group>";
+		};
 		1C4CBD2C1CF404C100D5F62F = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +180,7 @@
 				1C2CD78A1CF5329800CEE8AD /* CellProviderSample2 */,
 				1CD109791CF4308100B454D2 /* NativeAdSample1 */,
 				1C7335D51CF465150040D7D6 /* NativeAdSample2 */,
+				1C2CD7901CF5376C00CEE8AD /* NativeAdSample3 */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +317,7 @@
 			files = (
 				1C4CBD481CF404C100D5F62F /* LaunchScreen.storyboard in Resources */,
 				1C881F9E1CF4065E00335788 /* MainViewController.xib in Resources */,
+				1C2CD7951CF5378E00CEE8AD /* NativeAdSample3ViewController.xib in Resources */,
 				1CD1097E1CF430AD00B454D2 /* NativeAdSample1ViewController.xib in Resources */,
 				1C978F6C1CF46553004270A7 /* NativeAdSample2ViewController.xib in Resources */,
 				1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */,
@@ -370,6 +387,7 @@
 				1CD1097D1CF430AD00B454D2 /* NativeAdSample1ViewController.m in Sources */,
 				1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */,
 				1C881F9D1CF4065E00335788 /* MainViewController.m in Sources */,
+				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,
 				1C4CBD3A1CF404C100D5F62F /* main.m in Sources */,
 				1C978F711CF466CB004270A7 /* SampleView2.m in Sources */,

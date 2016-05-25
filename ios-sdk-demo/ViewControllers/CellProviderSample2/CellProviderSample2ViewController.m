@@ -94,7 +94,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"CellProviderSample1";
+    self.title = @"CellProviderSample2";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
     // 建立AdCellProvider
