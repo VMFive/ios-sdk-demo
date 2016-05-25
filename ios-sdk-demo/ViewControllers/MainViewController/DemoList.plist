@@ -24,6 +24,12 @@
 				<key>action</key>
 				<string>CellProviderSample1ViewController</string>
 			</dict>
+			<dict>
+				<key>rowText</key>
+				<string>CellProviderSample2 (without XIB)</string>
+				<key>action</key>
+				<string>CellProviderSample2ViewController</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>

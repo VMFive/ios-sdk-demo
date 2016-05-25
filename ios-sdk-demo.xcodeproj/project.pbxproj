@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C2CD7891CF5246100CEE8AD /* SampleView3.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7881CF5246100CEE8AD /* SampleView3.m */; };
+		1C2CD78E1CF532C800CEE8AD /* CellProviderSample2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */; };
+		1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */; };
 		1C4CBD3A1CF404C100D5F62F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD391CF404C100D5F62F /* main.m */; };
 		1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD3C1CF404C100D5F62F /* AppDelegate.m */; };
 		1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4CBD441CF404C100D5F62F /* Assets.xcassets */; };
@@ -28,6 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C2CD7871CF5246100CEE8AD /* SampleView3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView3.h; sourceTree = "<group>"; };
+		1C2CD7881CF5246100CEE8AD /* SampleView3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView3.m; sourceTree = "<group>"; };
+		1C2CD78B1CF532C800CEE8AD /* CellProviderSample2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellProviderSample2ViewController.h; sourceTree = "<group>"; };
+		1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellProviderSample2ViewController.m; sourceTree = "<group>"; };
+		1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellProviderSample2ViewController.xib; sourceTree = "<group>"; };
 		1C4CBD351CF404C100D5F62F /* ios-sdk-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-sdk-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4CBD391CF404C100D5F62F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C4CBD3B1CF404C100D5F62F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,6 +85,25 @@
 				3721F4F1A984F691C353B2BE /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1C2CD7861CF5243C00CEE8AD /* SampleView3 */ = {
+			isa = PBXGroup;
+			children = (
+				1C2CD7871CF5246100CEE8AD /* SampleView3.h */,
+				1C2CD7881CF5246100CEE8AD /* SampleView3.m */,
+			);
+			path = SampleView3;
+			sourceTree = "<group>";
+		};
+		1C2CD78A1CF5329800CEE8AD /* CellProviderSample2 */ = {
+			isa = PBXGroup;
+			children = (
+				1C2CD78B1CF532C800CEE8AD /* CellProviderSample2ViewController.h */,
+				1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */,
+				1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */,
+			);
+			path = CellProviderSample2;
 			sourceTree = "<group>";
 		};
 		1C4CBD2C1CF404C100D5F62F = {
@@ -135,6 +162,7 @@
 			children = (
 				1C881F991CF4062100335788 /* MainViewController */,
 				1C881F9F1CF41E5500335788 /* CellProviderSample1 */,
+				1C2CD78A1CF5329800CEE8AD /* CellProviderSample2 */,
 				1CD109791CF4308100B454D2 /* NativeAdSample1 */,
 				1C7335D51CF465150040D7D6 /* NativeAdSample2 */,
 			);
@@ -177,6 +205,7 @@
 			children = (
 				1CD109731CF4240300B454D2 /* SampleView1 */,
 				1C978F6D1CF466CB004270A7 /* SampleView2 */,
+				1C2CD7861CF5243C00CEE8AD /* SampleView3 */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,6 +307,7 @@
 				1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */,
 				1CD109781CF4242600B454D2 /* SampleView1.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
+				1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */,
 				1C881FA41CF41E8400335788 /* CellProviderSample1ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,8 +373,10 @@
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,
 				1C4CBD3A1CF404C100D5F62F /* main.m in Sources */,
 				1C978F711CF466CB004270A7 /* SampleView2.m in Sources */,
+				1C2CD78E1CF532C800CEE8AD /* CellProviderSample2ViewController.m in Sources */,
 				1C881FA31CF41E8400335788 /* CellProviderSample1ViewController.m in Sources */,
 				1C978F6B1CF46553004270A7 /* NativeAdSample2ViewController.m in Sources */,
+				1C2CD7891CF5246100CEE8AD /* SampleView3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
