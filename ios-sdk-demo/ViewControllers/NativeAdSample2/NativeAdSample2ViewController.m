@@ -106,7 +106,7 @@
 #pragma mark - Private Instance Method
 
 - (void)loadNativaAd {
-    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"MyNativeAd" adType:kVAAdTypeVideoCard];
+    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"VMFiveAdNetwork_NativeAdSample2" adType:kVAAdTypeVideoCard];
     self.nativeAd.testMode = YES;
     self.nativeAd.apiKey = @"YOUR API KEY HERE";
     self.nativeAd.delegate = self;

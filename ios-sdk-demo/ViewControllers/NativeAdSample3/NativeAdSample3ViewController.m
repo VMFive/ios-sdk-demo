@@ -86,7 +86,7 @@
     self.title = @"NativeAdSample3";
     
     // 建立NativeAd物件做為Render的Ad資料來源
-    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"VMFiveAdNetwork_NativeAdSample1" adType:kVAAdTypeVideoCard];
+    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"VMFiveAdNetwork_NativeAdSample3" adType:kVAAdTypeVideoCard];
     self.nativeAd.testMode = YES;
     self.nativeAd.apiKey = @"YOUR API KEY HERE";
     self.nativeAd.delegate = self;

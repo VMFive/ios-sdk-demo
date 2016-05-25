@@ -15,6 +15,17 @@
 	</dict>
 	<dict>
 		<key>sectionTitle</key>
+		<string>SDK Information</string>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>rowText</key>
+				<string>version</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionTitle</key>
 		<string>Add ads in your tableview</string>
 		<key>rows</key>
 		<array>
@@ -34,26 +45,14 @@
 	</dict>
 	<dict>
 		<key>sectionTitle</key>
-		<string>Use nativeAd fit your design</string>
+		<string>Default styles we provide</string>
 		<key>rows</key>
 		<array>
 			<dict>
 				<key>rowText</key>
-				<string>NativeAdSample1</string>
+				<string>BannerSample</string>
 				<key>action</key>
-				<string>NativeAdSample1ViewController</string>
-			</dict>
-			<dict>
-				<key>rowText</key>
-				<string>NativeAdSample2</string>
-				<key>action</key>
-				<string>NativeAdSample2ViewController</string>
-			</dict>
-			<dict>
-				<key>rowText</key>
-				<string>NativeAdSample3 (without XIB)</string>
-				<key>action</key>
-				<string>NativeAdSample3ViewController</string>
+				<string>BannerSampleViewController</string>
 			</dict>
 		</array>
 	</dict>
