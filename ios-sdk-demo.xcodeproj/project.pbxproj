@@ -18,6 +18,7 @@
 		1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD79F1CF541BB00CEE8AD /* CardSampleViewController.xib */; };
 		1C2CD7A61CF5447500CEE8AD /* InterstitialSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7A41CF5447500CEE8AD /* InterstitialSampleViewController.m */; };
 		1C2CD7A71CF5447500CEE8AD /* InterstitialSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD7A51CF5447500CEE8AD /* InterstitialSampleViewController.xib */; };
+		1C41C85D1CFC200100970659 /* VANativeAd+FullscreenIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C41C85C1CFC200100970659 /* VANativeAd+FullscreenIcon.m */; };
 		1C4CBD3A1CF404C100D5F62F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD391CF404C100D5F62F /* main.m */; };
 		1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4CBD3C1CF404C100D5F62F /* AppDelegate.m */; };
 		1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4CBD441CF404C100D5F62F /* Assets.xcassets */; };
@@ -31,6 +32,8 @@
 		1C978F6C1CF46553004270A7 /* NativeAdSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F6A1CF46553004270A7 /* NativeAdSample2ViewController.xib */; };
 		1C978F711CF466CB004270A7 /* SampleView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C978F6F1CF466CB004270A7 /* SampleView2.m */; };
 		1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F701CF466CB004270A7 /* SampleView2.xib */; };
+		1CC7F8FF1CFC1C72000CCF25 /* NativeAdSample4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC7F8FD1CFC1C72000CCF25 /* NativeAdSample4ViewController.m */; };
+		1CC7F9001CFC1C72000CCF25 /* NativeAdSample4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */; };
 		1CD109761CF4241400B454D2 /* SampleView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD109751CF4241400B454D2 /* SampleView1.m */; };
 		1CD109781CF4242600B454D2 /* SampleView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD109771CF4242600B454D2 /* SampleView1.xib */; };
 		1CD1097D1CF430AD00B454D2 /* NativeAdSample1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1097B1CF430AD00B454D2 /* NativeAdSample1ViewController.m */; };
@@ -56,6 +59,8 @@
 		1C2CD7A31CF5447500CEE8AD /* InterstitialSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialSampleViewController.h; sourceTree = "<group>"; };
 		1C2CD7A41CF5447500CEE8AD /* InterstitialSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialSampleViewController.m; sourceTree = "<group>"; };
 		1C2CD7A51CF5447500CEE8AD /* InterstitialSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterstitialSampleViewController.xib; sourceTree = "<group>"; };
+		1C41C85B1CFC200100970659 /* VANativeAd+FullscreenIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VANativeAd+FullscreenIcon.h"; sourceTree = "<group>"; };
+		1C41C85C1CFC200100970659 /* VANativeAd+FullscreenIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VANativeAd+FullscreenIcon.m"; sourceTree = "<group>"; };
 		1C4CBD351CF404C100D5F62F /* ios-sdk-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-sdk-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4CBD391CF404C100D5F62F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C4CBD3B1CF404C100D5F62F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +81,9 @@
 		1C978F6E1CF466CB004270A7 /* SampleView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView2.h; sourceTree = "<group>"; };
 		1C978F6F1CF466CB004270A7 /* SampleView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView2.m; sourceTree = "<group>"; };
 		1C978F701CF466CB004270A7 /* SampleView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView2.xib; sourceTree = "<group>"; };
+		1CC7F8FC1CFC1C72000CCF25 /* NativeAdSample4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdSample4ViewController.h; sourceTree = "<group>"; };
+		1CC7F8FD1CFC1C72000CCF25 /* NativeAdSample4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdSample4ViewController.m; sourceTree = "<group>"; };
+		1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdSample4ViewController.xib; sourceTree = "<group>"; };
 		1CD109741CF4241400B454D2 /* SampleView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView1.h; sourceTree = "<group>"; };
 		1CD109751CF4241400B454D2 /* SampleView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView1.m; sourceTree = "<group>"; };
 		1CD109771CF4242600B454D2 /* SampleView1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView1.xib; sourceTree = "<group>"; };
@@ -226,6 +234,7 @@
 				1CD109791CF4308100B454D2 /* NativeAdSample1 */,
 				1C7335D51CF465150040D7D6 /* NativeAdSample2 */,
 				1C2CD7901CF5376C00CEE8AD /* NativeAdSample3 */,
+				1CC7F8F61CFC1941000CCF25 /* NativeAdSample4 */,
 				1C2CD7961CF53AF400CEE8AD /* BannerSample */,
 				1C2CD79C1CF541A700CEE8AD /* CardSample */,
 				1C2CD7A21CF5445E00CEE8AD /* InterstitialSample */,
@@ -262,6 +271,18 @@
 				1C978F701CF466CB004270A7 /* SampleView2.xib */,
 			);
 			path = SampleView2;
+			sourceTree = "<group>";
+		};
+		1CC7F8F61CFC1941000CCF25 /* NativeAdSample4 */ = {
+			isa = PBXGroup;
+			children = (
+				1CC7F8FC1CFC1C72000CCF25 /* NativeAdSample4ViewController.h */,
+				1CC7F8FD1CFC1C72000CCF25 /* NativeAdSample4ViewController.m */,
+				1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */,
+				1C41C85B1CFC200100970659 /* VANativeAd+FullscreenIcon.h */,
+				1C41C85C1CFC200100970659 /* VANativeAd+FullscreenIcon.m */,
+			);
+			path = NativeAdSample4;
 			sourceTree = "<group>";
 		};
 		1CD1096C1CF4235900B454D2 /* Views */ = {
@@ -375,6 +396,7 @@
 				1CD109781CF4242600B454D2 /* SampleView1.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
 				1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */,
+				1CC7F9001CFC1C72000CCF25 /* NativeAdSample4ViewController.xib in Resources */,
 				1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */,
 				1C881FA41CF41E8400335788 /* CellProviderSample1ViewController.xib in Resources */,
 			);
@@ -435,10 +457,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C41C85D1CFC200100970659 /* VANativeAd+FullscreenIcon.m in Sources */,
 				1CD1097D1CF430AD00B454D2 /* NativeAdSample1ViewController.m in Sources */,
 				1C4CBD3D1CF404C100D5F62F /* AppDelegate.m in Sources */,
 				1C2CD7A01CF541BB00CEE8AD /* CardSampleViewController.m in Sources */,
 				1C2CD79A1CF53B1800CEE8AD /* BannerSampleViewController.m in Sources */,
+				1CC7F8FF1CFC1C72000CCF25 /* NativeAdSample4ViewController.m in Sources */,
 				1C881F9D1CF4065E00335788 /* MainViewController.m in Sources */,
 				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,

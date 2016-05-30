@@ -36,6 +36,12 @@
 				<key>action</key>
 				<string>NativeAdSample3ViewController</string>
 			</dict>
+			<dict>
+				<key>rowText</key>
+				<string>NativeAdSample4 (without icon)</string>
+				<key>action</key>
+				<string>NativeAdSample4ViewController</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>
