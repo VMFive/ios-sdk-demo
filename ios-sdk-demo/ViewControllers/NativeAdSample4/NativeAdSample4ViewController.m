@@ -25,24 +25,25 @@
     if (!self.adView) {
         VANativeAdViewRender *render = [[VANativeAdViewRender alloc] initWithNativeAd:nativeAd customizedAdViewClass:[SampleView1 class]];
         
+        __weak NativeAdSample4ViewController *weakSelf = self;
         [render renderWithCompleteHandler: ^(UIView<VANativeAdViewRenderProtocol> *view, NSError *error) {
-            
             if (!error) {
-                self.adView = view;
-                [self.view addSubview:self.adView];
+                [weakSelf.view addSubview:view];
                 
-                self.adView.translatesAutoresizingMaskIntoConstraints = NO;
-                [self.adView addConstraint:[NSLayoutConstraint constraintWithItem:self.adView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:CGRectGetWidth(self.adView.bounds)]];
-                [self.adView addConstraint:[NSLayoutConstraint constraintWithItem:self.adView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:CGRectGetHeight(self.adView.bounds)]];
+                // autolayout 設定, 固定大小, 水平垂直置中
+                view.translatesAutoresizingMaskIntoConstraints = NO;
+                [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:CGRectGetWidth(view.bounds)]];
+                [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:CGRectGetHeight(view.bounds)]];
                 
-                [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.adView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-                [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.adView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
-                [self.view layoutIfNeeded];
+                [weakSelf.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:weakSelf.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+                [weakSelf.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:weakSelf.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
+                [weakSelf.view layoutIfNeeded];
+                
+                weakSelf.adView = view;
             }
             else {
                 NSLog(@"Render did fail With error : %@", error);
             }
-            
         }];
     }
     else {

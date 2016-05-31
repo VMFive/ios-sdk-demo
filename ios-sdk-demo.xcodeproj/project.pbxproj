@@ -229,12 +229,12 @@
 			isa = PBXGroup;
 			children = (
 				1C881F991CF4062100335788 /* MainViewController */,
-				1C881F9F1CF41E5500335788 /* CellProviderSample1 */,
-				1C2CD78A1CF5329800CEE8AD /* CellProviderSample2 */,
 				1CD109791CF4308100B454D2 /* NativeAdSample1 */,
 				1C7335D51CF465150040D7D6 /* NativeAdSample2 */,
 				1C2CD7901CF5376C00CEE8AD /* NativeAdSample3 */,
 				1CC7F8F61CFC1941000CCF25 /* NativeAdSample4 */,
+				1C881F9F1CF41E5500335788 /* CellProviderSample1 */,
+				1C2CD78A1CF5329800CEE8AD /* CellProviderSample2 */,
 				1C2CD7961CF53AF400CEE8AD /* BannerSample */,
 				1C2CD79C1CF541A700CEE8AD /* CardSample */,
 				1C2CD7A21CF5445E00CEE8AD /* InterstitialSample */,

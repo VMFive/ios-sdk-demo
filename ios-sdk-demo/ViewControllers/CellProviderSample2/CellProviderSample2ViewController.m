@@ -75,7 +75,7 @@
 
 #pragma mark - Private Instance Method
 
-- (VANativeAdViewAttributeObject *)retrieveSampleView1Attributes {
+- (VANativeAdViewAttributeObject *)retrieveSampleView3Attributes {
     VANativeAdViewAttributeObject *attribute = [VANativeAdViewAttributeObject new];
     attribute.customAdViewClass = [SampleView3 class];
     attribute.customAdViewSizeHandler = ^(CGFloat width, CGFloat ratio) {
@@ -98,7 +98,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
     // 建立AdCellProvider
-    self.adCellProvider = [[VAAdCellProvider alloc] initWithPlacement:@"VMFiveAdNetwork_CellProviderSample2" adType:kVAAdTypeVideoCard tableView:self.tableView forAttributes:[self retrieveSampleView1Attributes]];
+    self.adCellProvider = [[VAAdCellProvider alloc] initWithPlacement:@"VMFiveAdNetwork_CellProviderSample2" adType:kVAAdTypeVideoCard tableView:self.tableView forAttributes:[self retrieveSampleView3Attributes]];
     self.adCellProvider.testMode = YES;
     self.adCellProvider.apiKey = @"YOUR API KEY";
     [self.adCellProvider loadAds];
