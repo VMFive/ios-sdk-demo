@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SampleView4">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNp-IN-sei">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pNp-IN-sei" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CKH-qk-8Oi"/>
+                <constraint firstItem="pNp-IN-sei" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="O60-4F-7PL"/>
+                <constraint firstItem="pNp-IN-sei" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gQk-zx-u1E"/>
+                <constraint firstItem="pNp-IN-sei" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="xuF-Be-q2a"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="videoView" destination="pNp-IN-sei" id="GTb-XX-qXU"/>
+            </connections>
+        </view>
+    </objects>
+</document>
