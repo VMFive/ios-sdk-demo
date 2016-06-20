@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <VMFiveAdNetwork/VAAdRewardedVideo.h>
+#import <VMFiveAdNetwork/VMFiveAdNetwork.h>
 
 @interface RewardedVideoSampleViewController : UIViewController <VAAdRewardedVideoDelegate>
 
