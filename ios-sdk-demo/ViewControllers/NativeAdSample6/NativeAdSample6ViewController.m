@@ -82,7 +82,7 @@
 #pragma mark - Private Instance Method
 
 - (void)loadNativaAd {
-    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"VMFiveAdNetwork_NativeAdSample2" adType:kVAAdTypeVideoCard];
+    self.nativeAd = [[VANativeAd alloc] initWithPlacement:@"VMFiveAdNetwork_NativeAdSample6" adType:kVAAdTypeVideoCard];
     self.nativeAd.testMode = YES;
     self.nativeAd.apiKey = @"YOUR API KEY HERE";
     self.nativeAd.delegate = self;
@@ -117,7 +117,6 @@
             newFrame.origin.y = height;
             newFrame.size.height -= height;
             weakSelf.view.window.frame = newFrame;
-            weakSelf.view.frame = weakSelf.view.window.bounds;
         }];
     }
 }
