@@ -43,6 +43,12 @@
 		1C978F6C1CF46553004270A7 /* NativeAdSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F6A1CF46553004270A7 /* NativeAdSample2ViewController.xib */; };
 		1C978F711CF466CB004270A7 /* SampleView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C978F6F1CF466CB004270A7 /* SampleView2.m */; };
 		1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F701CF466CB004270A7 /* SampleView2.xib */; };
+		1CADD4C01D1BC50800233963 /* libVMFiveMoPubAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */; };
+		1CB5C2051D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5C2031D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m */; };
+		1CB5C2061D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CB5C2041D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib */; };
+		1CB5C2121D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5C2101D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m */; };
+		1CB5C2131D1B94080031BFE9 /* MoPubNativeAdSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CB5C2111D1B94080031BFE9 /* MoPubNativeAdSampleViewController.xib */; };
+		1CB5C21A1D1BAE880031BFE9 /* MPNativeVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5C2171D1BAE880031BFE9 /* MPNativeVideoView.m */; };
 		1CC7F8FF1CFC1C72000CCF25 /* NativeAdSample4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC7F8FD1CFC1C72000CCF25 /* NativeAdSample4ViewController.m */; };
 		1CC7F9001CFC1C72000CCF25 /* NativeAdSample4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */; };
 		1CCF94871D13D5FF00749F0F /* RewardedVideoSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF94851D13D5FF00749F0F /* RewardedVideoSampleViewController.m */; };
@@ -114,6 +120,18 @@
 		1C978F6E1CF466CB004270A7 /* SampleView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView2.h; sourceTree = "<group>"; };
 		1C978F6F1CF466CB004270A7 /* SampleView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView2.m; sourceTree = "<group>"; };
 		1C978F701CF466CB004270A7 /* SampleView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView2.xib; sourceTree = "<group>"; };
+		1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVMFiveMoPubAdapter.a; sourceTree = "<group>"; };
+		1CB5C2021D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoPubInterstitialSampleViewController.h; sourceTree = "<group>"; };
+		1CB5C2031D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoPubInterstitialSampleViewController.m; sourceTree = "<group>"; };
+		1CB5C2041D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoPubInterstitialSampleViewController.xib; sourceTree = "<group>"; };
+		1CB5C20A1D1B82DA0031BFE9 /* VMFiveInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMFiveInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		1CB5C20B1D1B82DA0031BFE9 /* VMFiveNativeVideoAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMFiveNativeVideoAdAdapter.h; sourceTree = "<group>"; };
+		1CB5C20C1D1B82DA0031BFE9 /* VMFiveNativeVideoCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMFiveNativeVideoCustomEvent.h; sourceTree = "<group>"; };
+		1CB5C20F1D1B94080031BFE9 /* MoPubNativeAdSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoPubNativeAdSampleViewController.h; sourceTree = "<group>"; };
+		1CB5C2101D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoPubNativeAdSampleViewController.m; sourceTree = "<group>"; };
+		1CB5C2111D1B94080031BFE9 /* MoPubNativeAdSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoPubNativeAdSampleViewController.xib; sourceTree = "<group>"; };
+		1CB5C2161D1BAE880031BFE9 /* MPNativeVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNativeVideoView.h; sourceTree = "<group>"; };
+		1CB5C2171D1BAE880031BFE9 /* MPNativeVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNativeVideoView.m; sourceTree = "<group>"; };
 		1CC7F8FC1CFC1C72000CCF25 /* NativeAdSample4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdSample4ViewController.h; sourceTree = "<group>"; };
 		1CC7F8FD1CFC1C72000CCF25 /* NativeAdSample4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdSample4ViewController.m; sourceTree = "<group>"; };
 		1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdSample4ViewController.xib; sourceTree = "<group>"; };
@@ -141,6 +159,7 @@
 			files = (
 				1C4468D81D1ACF4600D863A3 /* libVMFiveAdMobAdapter.a in Frameworks */,
 				2228DB05B9E3A9FB77AC0324 /* libPods.a in Frameworks */,
+				1CADD4C01D1BC50800233963 /* libVMFiveMoPubAdapter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				1C4468D31D1ACF4600D863A3 /* VMFiveAdMobAdapter */,
+				1CB5C2071D1B82DA0031BFE9 /* VMFiveMoPubAdapter */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -353,6 +373,8 @@
 				1CCF94831D13D5C400749F0F /* RewardedVideoSample */,
 				1C4468D91D1ACF6F00D863A3 /* AdMobBannerSample */,
 				1CD15BBE1D1ADE3F00498489 /* AdMobInterstitialSample */,
+				1CB5C2011D1B7F2E0031BFE9 /* MoPubInterstitialSample */,
+				1CB5C20E1D1B93EA0031BFE9 /* MoPubNativeAdSample */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -386,6 +408,47 @@
 				1C978F701CF466CB004270A7 /* SampleView2.xib */,
 			);
 			path = SampleView2;
+			sourceTree = "<group>";
+		};
+		1CB5C2011D1B7F2E0031BFE9 /* MoPubInterstitialSample */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5C2021D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.h */,
+				1CB5C2031D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m */,
+				1CB5C2041D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib */,
+			);
+			path = MoPubInterstitialSample;
+			sourceTree = "<group>";
+		};
+		1CB5C2071D1B82DA0031BFE9 /* VMFiveMoPubAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */,
+				1CB5C2091D1B82DA0031BFE9 /* VMFiveMoPubAdapter */,
+			);
+			path = VMFiveMoPubAdapter;
+			sourceTree = "<group>";
+		};
+		1CB5C2091D1B82DA0031BFE9 /* VMFiveMoPubAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5C20A1D1B82DA0031BFE9 /* VMFiveInterstitialCustomEvent.h */,
+				1CB5C20B1D1B82DA0031BFE9 /* VMFiveNativeVideoAdAdapter.h */,
+				1CB5C20C1D1B82DA0031BFE9 /* VMFiveNativeVideoCustomEvent.h */,
+			);
+			path = VMFiveMoPubAdapter;
+			sourceTree = "<group>";
+		};
+		1CB5C20E1D1B93EA0031BFE9 /* MoPubNativeAdSample */ = {
+			isa = PBXGroup;
+			children = (
+				1CB5C20F1D1B94080031BFE9 /* MoPubNativeAdSampleViewController.h */,
+				1CB5C2101D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m */,
+				1CB5C2111D1B94080031BFE9 /* MoPubNativeAdSampleViewController.xib */,
+				1CB5C2161D1BAE880031BFE9 /* MPNativeVideoView.h */,
+				1CB5C2171D1BAE880031BFE9 /* MPNativeVideoView.m */,
+			);
+			path = MoPubNativeAdSample;
 			sourceTree = "<group>";
 		};
 		1CC7F8F61CFC1941000CCF25 /* NativeAdSample4 */ = {
@@ -535,12 +598,14 @@
 				1CCF94881D13D5FF00749F0F /* RewardedVideoSampleViewController.xib in Resources */,
 				1C4468DE1D1ACF8500D863A3 /* AdMobBannerSampleViewController.xib in Resources */,
 				1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */,
+				1CB5C2061D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
 				1C410D901D07CB1E0078D9A1 /* YourCollectionViewCell.xib in Resources */,
 				1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */,
 				1C410D8B1D07C77E0078D9A1 /* NativeAdSample5ViewController.xib in Resources */,
 				1CC7F9001CFC1C72000CCF25 /* NativeAdSample4ViewController.xib in Resources */,
 				1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */,
+				1CB5C2131D1B94080031BFE9 /* MoPubNativeAdSampleViewController.xib in Resources */,
 				1C881FA41CF41E8400335788 /* CellProviderSample1ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,8 +675,11 @@
 				1C2CD7A01CF541BB00CEE8AD /* CardSampleViewController.m in Sources */,
 				1C410D8A1D07C77E0078D9A1 /* NativeAdSample5ViewController.m in Sources */,
 				1C2CD79A1CF53B1800CEE8AD /* BannerSampleViewController.m in Sources */,
+				1CB5C2051D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m in Sources */,
 				1CC7F8FF1CFC1C72000CCF25 /* NativeAdSample4ViewController.m in Sources */,
+				1CB5C21A1D1BAE880031BFE9 /* MPNativeVideoView.m in Sources */,
 				1C881F9D1CF4065E00335788 /* MainViewController.m in Sources */,
+				1CB5C2121D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m in Sources */,
 				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,
 				1C4CBD3A1CF404C100D5F62F /* main.m in Sources */,
@@ -733,6 +801,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveAdMobAdapter",
+					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveMoPubAdapter",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "tw.daidouji.ios-sdk-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -750,6 +819,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveAdMobAdapter",
+					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveMoPubAdapter",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "tw.daidouji.ios-sdk-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";

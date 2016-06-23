@@ -19,6 +19,7 @@
 #pragma mark - GADInterstitialDelegate
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    NSLog(@"%s", sel_getName(_cmd));
     if (ad) {
         [ad presentFromRootViewController:self];
     }
@@ -29,6 +30,7 @@
 }
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    NSLog(@"%s", sel_getName(_cmd));
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     }
