@@ -24,6 +24,8 @@
 #pragma mark - VANativeAdDelegate
 
 - (void)nativeAdDidLoad:(VANativeAd *)nativeAd {
+    NSLog(@"%s", sel_getName(_cmd));
+    
     VANativeAdViewRender *render = [[VANativeAdViewRender alloc] initWithNativeAd:nativeAd customizedAdViewClass:[SampleView3 class]];
     
     __weak NativeAdSample7ViewController *weakSelf = self;
