@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1BA1731D2A44AB0059B062 /* PetImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA1711D2A44AB0059B062 /* PetImageTableViewCell.m */; };
+		1C1BA1741D2A44AB0059B062 /* PetImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA1721D2A44AB0059B062 /* PetImageTableViewCell.xib */; };
+		1C1BA1781D2A5B3E0059B062 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA1761D2A5B3E0059B062 /* NoteTableViewCell.m */; };
+		1C1BA1791D2A5B3E0059B062 /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA1771D2A5B3E0059B062 /* NoteTableViewCell.xib */; };
 		1C2CD7891CF5246100CEE8AD /* SampleView3.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD7881CF5246100CEE8AD /* SampleView3.m */; };
 		1C2CD78E1CF532C800CEE8AD /* CellProviderSample2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2CD78C1CF532C800CEE8AD /* CellProviderSample2ViewController.m */; };
 		1C2CD78F1CF532C800CEE8AD /* CellProviderSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2CD78D1CF532C800CEE8AD /* CellProviderSample2ViewController.xib */; };
@@ -65,6 +69,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C1BA1701D2A44AB0059B062 /* PetImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetImageTableViewCell.h; sourceTree = "<group>"; };
+		1C1BA1711D2A44AB0059B062 /* PetImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetImageTableViewCell.m; sourceTree = "<group>"; };
+		1C1BA1721D2A44AB0059B062 /* PetImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetImageTableViewCell.xib; sourceTree = "<group>"; };
+		1C1BA1751D2A5B3E0059B062 /* NoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteTableViewCell.h; sourceTree = "<group>"; };
+		1C1BA1761D2A5B3E0059B062 /* NoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTableViewCell.m; sourceTree = "<group>"; };
+		1C1BA1771D2A5B3E0059B062 /* NoteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
 		1C2CD7871CF5246100CEE8AD /* SampleView3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView3.h; sourceTree = "<group>"; };
 		1C2CD7881CF5246100CEE8AD /* SampleView3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView3.m; sourceTree = "<group>"; };
 		1C2CD78B1CF532C800CEE8AD /* CellProviderSample2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellProviderSample2ViewController.h; sourceTree = "<group>"; };
@@ -402,6 +412,12 @@
 				1C881FA01CF41E8400335788 /* CellProviderSample1ViewController.h */,
 				1C881FA11CF41E8400335788 /* CellProviderSample1ViewController.m */,
 				1C881FA21CF41E8400335788 /* CellProviderSample1ViewController.xib */,
+				1C1BA1701D2A44AB0059B062 /* PetImageTableViewCell.h */,
+				1C1BA1711D2A44AB0059B062 /* PetImageTableViewCell.m */,
+				1C1BA1721D2A44AB0059B062 /* PetImageTableViewCell.xib */,
+				1C1BA1751D2A5B3E0059B062 /* NoteTableViewCell.h */,
+				1C1BA1761D2A5B3E0059B062 /* NoteTableViewCell.m */,
+				1C1BA1771D2A5B3E0059B062 /* NoteTableViewCell.xib */,
 			);
 			path = CellProviderSample1;
 			sourceTree = "<group>";
@@ -614,8 +630,10 @@
 				1CCF94881D13D5FF00749F0F /* RewardedVideoSampleViewController.xib in Resources */,
 				1C4468DE1D1ACF8500D863A3 /* AdMobBannerSampleViewController.xib in Resources */,
 				1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */,
+				1C1BA1791D2A5B3E0059B062 /* NoteTableViewCell.xib in Resources */,
 				1CB5C2061D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
+				1C1BA1741D2A44AB0059B062 /* PetImageTableViewCell.xib in Resources */,
 				1C410D901D07CB1E0078D9A1 /* YourCollectionViewCell.xib in Resources */,
 				1C2CD7A11CF541BB00CEE8AD /* CardSampleViewController.xib in Resources */,
 				1C410D8B1D07C77E0078D9A1 /* NativeAdSample5ViewController.xib in Resources */,
@@ -694,7 +712,9 @@
 				1C2CD79A1CF53B1800CEE8AD /* BannerSampleViewController.m in Sources */,
 				1CB5C2051D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m in Sources */,
 				1CC7F8FF1CFC1C72000CCF25 /* NativeAdSample4ViewController.m in Sources */,
+				1C1BA1781D2A5B3E0059B062 /* NoteTableViewCell.m in Sources */,
 				1CB5C21A1D1BAE880031BFE9 /* MPNativeVideoView.m in Sources */,
+				1C1BA1731D2A44AB0059B062 /* PetImageTableViewCell.m in Sources */,
 				1C881F9D1CF4065E00335788 /* MainViewController.m in Sources */,
 				1CB5C2121D1B94080031BFE9 /* MoPubNativeAdSampleViewController.m in Sources */,
 				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
