@@ -194,8 +194,8 @@
                 NSDictionary *currentInfo = self.pets[indexPath.row / 4];
                 dummyCell.textView.text = currentInfo[@"Note"];
                 CGSize sizeThatFitsTextView = [dummyCell.textView sizeThatFits:CGSizeMake(CGRectGetWidth(dummyCell.textView.frame), MAXFLOAT)];
-                [self.rowHeight setObject:@(sizeThatFitsTextView.height + 15) forKey:indexPath];
-                return sizeThatFitsTextView.height + 15;
+                [self.rowHeight setObject:@(sizeThatFitsTextView.height + 30) forKey:indexPath];
+                return sizeThatFitsTextView.height + 30;
             }
         }
             
