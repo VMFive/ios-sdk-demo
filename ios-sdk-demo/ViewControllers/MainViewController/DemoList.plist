@@ -38,7 +38,7 @@
 			</dict>
 			<dict>
 				<key>rowText</key>
-				<string>NativeAdSample4 (without icon)</string>
+				<string>NativeAdSample4 (Items Layout)</string>
 				<key>action</key>
 				<string>NativeAdSample4ViewController</string>
 			</dict>

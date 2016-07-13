@@ -9,6 +9,7 @@
 #import "NativeAdSample4ViewController.h"
 #import "SampleView1.h"
 #import "VANativeAd+FullscreenIcon.h"
+#import "VANativeAd+IconAlignment.h"
 
 @interface NativeAdSample4ViewController ()
 
@@ -99,6 +100,14 @@
     NSLog(@"===== will change isNeedFullscreenIcon from %@", self.nativeAd.isNeedFullscreenIcon ? @"YES" : @"NO");
     self.nativeAd.isNeedFullscreenIcon = NO;
     NSLog(@"===== did change isNeedFullscreenIcon to %@", self.nativeAd.isNeedFullscreenIcon ? @"YES" : @"NO");
+    
+    // 改變 videoItemsAlignment 設定值, 可控制 icon 對齊的是 video 影片邊緣, 或是整個 adview 畫面邊緣
+    // 0 為貼齊 video, 1 為貼齊 view
+    // 需 #import "VANativeAd+IconAlignment.h" 之後
+    // 可以出現這個設定值
+    NSLog(@"===== will change videoItemsAlignment from %td", self.nativeAd.videoItemsAlignment);
+    self.nativeAd.videoItemsAlignment = 1;
+    NSLog(@"===== did change videoItemsAlignment to %td", self.nativeAd.videoItemsAlignment);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

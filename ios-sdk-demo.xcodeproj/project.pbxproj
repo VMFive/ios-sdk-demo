@@ -65,6 +65,7 @@
 		1CD1097E1CF430AD00B454D2 /* NativeAdSample1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD1097C1CF430AD00B454D2 /* NativeAdSample1ViewController.xib */; };
 		1CD15BC21D1ADE5A00498489 /* AdMobInterstitialSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD15BC01D1ADE5A00498489 /* AdMobInterstitialSampleViewController.m */; };
 		1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD15BC11D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib */; };
+		1CD8F7BB1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */; };
 		2228DB05B9E3A9FB77AC0324 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3721F4F1A984F691C353B2BE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,8 @@
 		1CD15BBF1D1ADE5A00498489 /* AdMobInterstitialSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobInterstitialSampleViewController.h; sourceTree = "<group>"; };
 		1CD15BC01D1ADE5A00498489 /* AdMobInterstitialSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobInterstitialSampleViewController.m; sourceTree = "<group>"; };
 		1CD15BC11D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdMobInterstitialSampleViewController.xib; sourceTree = "<group>"; };
+		1CD8F7B91D35D38C00F4BA66 /* VANativeAd+IconAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VANativeAd+IconAlignment.h"; sourceTree = "<group>"; };
+		1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VANativeAd+IconAlignment.m"; sourceTree = "<group>"; };
 		3721F4F1A984F691C353B2BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0F3D13580F3D8607643ADB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9AE437540B6FDF291FC6BA6C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -491,6 +494,8 @@
 				1CC7F8FE1CFC1C72000CCF25 /* NativeAdSample4ViewController.xib */,
 				1C41C85B1CFC200100970659 /* VANativeAd+FullscreenIcon.h */,
 				1C41C85C1CFC200100970659 /* VANativeAd+FullscreenIcon.m */,
+				1CD8F7B91D35D38C00F4BA66 /* VANativeAd+IconAlignment.h */,
+				1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */,
 			);
 			path = NativeAdSample4;
 			sourceTree = "<group>";
@@ -721,6 +726,7 @@
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,
 				1C4CBD3A1CF404C100D5F62F /* main.m in Sources */,
 				1C2CD7A61CF5447500CEE8AD /* InterstitialSampleViewController.m in Sources */,
+				1CD8F7BB1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m in Sources */,
 				1C32A23A1D1247AC0031B681 /* SampleView4.m in Sources */,
 				1C978F711CF466CB004270A7 /* SampleView2.m in Sources */,
 				1C2CD78E1CF532C800CEE8AD /* CellProviderSample2ViewController.m in Sources */,
