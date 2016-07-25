@@ -9,11 +9,23 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 
+@interface DemoNavigationController : UINavigationController
+
+@end
+
+@implementation DemoNavigationController
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MainViewController new]];
+    self.window.rootViewController = [[DemoNavigationController alloc] initWithRootViewController:[MainViewController new]];
     [self.window makeKeyAndVisible];
     return YES;
 }

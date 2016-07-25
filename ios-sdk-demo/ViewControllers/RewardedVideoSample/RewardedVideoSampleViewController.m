@@ -34,6 +34,7 @@
 
 - (void)rewardedVideoWillClose:(VAAdRewardedVideo *)rewardedVideo {
     NSLog(@"%s", sel_getName(_cmd));
+    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
 }
 
 - (void)rewardedVideoDidClose:(VAAdRewardedVideo *)rewardedVideo {
