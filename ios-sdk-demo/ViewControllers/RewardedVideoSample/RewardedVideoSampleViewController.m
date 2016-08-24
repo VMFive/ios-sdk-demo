@@ -60,6 +60,11 @@
     NSLog(@"%s", sel_getName(_cmd));
 }
 
+- (NSString *)rewardedCustomString {
+    NSLog(@"%s", sel_getName(_cmd));
+    return @"YOURCUSTOMSTRING";
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
