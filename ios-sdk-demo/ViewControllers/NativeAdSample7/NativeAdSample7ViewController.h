@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <VMFiveAdNetwork/VMFiveAdNetwork.h>
 
-@interface NativeAdSample7ViewController : UIViewController <VANativeAdDelegate>
+@interface NativeAdSample7ViewController : UIViewController <VAAdViewDelegate>
 
 @end
