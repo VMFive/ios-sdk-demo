@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *videoView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (weak, nonatomic) IBOutlet UIButton *ctaButton;
 
 @property (nonatomic, strong) UILabel *ctaLabel;
@@ -33,10 +32,6 @@
 
 - (UILabel *)nativeTitleTextLabel {
     return self.titleLabel;
-}
-
-- (UIImageView *)nativeMainImageView {
-    return self.mainImageView;
 }
 
 - (UILabel *)nativeCallToActionTextLabel {

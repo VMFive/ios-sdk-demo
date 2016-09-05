@@ -218,8 +218,8 @@
         // 這邊我設定 ad 與畫面等寬
         CGFloat adWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
         
-        // 高度 80 為預留給 title 和 main image, 其餘的部分, 會被等比例的壓短
-        CGFloat adHeight = adWidth * ratio + 80.0f;
+        // 高度 30 為預留給 title, 其餘的部分, 會被等比例的壓短
+        CGFloat adHeight = adWidth * ratio + 30.0f;
         return CGSizeMake(adWidth, adHeight);
     };
     return attribute;
