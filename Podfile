@@ -3,5 +3,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 pod 'VMFiveAdNetwork', '~> 3.0.0'
 pod 'GoogleMobileAds', '~> 7.8.0'
-pod 'mopub-ios-sdk', '~> 4.7.0'
+pod 'mopub-ios-sdk', '~> 4.9.1'
 
