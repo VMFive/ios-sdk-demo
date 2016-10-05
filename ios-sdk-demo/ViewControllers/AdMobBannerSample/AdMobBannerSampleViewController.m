@@ -57,7 +57,7 @@
     // forLabel後得字串必須與後台所設定的CustomEvent Label相同
     // testMode參數為非必要（此部份可跳過），若未設定testMode，後台需設定API Key
     GADCustomEventExtras *extra = [[GADCustomEventExtras alloc] init];
-    [extra setExtras:@{ @"testMode": @YES } forLabel:@"VMFCustomBanner"];
+    [extra setExtras:@{ @"testMode": @YES, @"placement": @"yourplacement", @"apiKey": @"yourapikey" } forLabel:@"VMFCustomBanner"];
     [request registerAdNetworkExtras:extra];
     
     [self.bannerView loadRequest:request];

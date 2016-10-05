@@ -51,7 +51,7 @@
     // Label必須與後台所設定的CustomEvent Label相同
     // testMode參數為非必要（此部份可跳過），若未設定testMode，後台需設定API Key
     GADCustomEventExtras *extra = [[GADCustomEventExtras alloc] init];
-    [extra setExtras:@{ @"testMode": @YES } forLabel:@"VMFCustomInterstitial"];
+    [extra setExtras:@{ @"testMode": @YES, @"placement": @"yourplacement", @"apiKey": @"yourapikey" } forLabel:@"VMFCustomInterstitial"];
     [request registerAdNetworkExtras:extra];
     [self.interstitial loadRequest:request];
 }
