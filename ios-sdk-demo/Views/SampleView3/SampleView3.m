@@ -15,6 +15,8 @@
 @property (nonatomic, weak) UILabel *titleLabel;
 @property (nonatomic, weak) UIButton *ctaButton;
 
+@property (nonatomic, strong) UILabel *ctaLabel;
+
 @end
 
 @implementation SampleView3
@@ -31,6 +33,10 @@
 
 - (UILabel *)nativeTitleTextLabel {
     return self.titleLabel;
+}
+
+- (UILabel *)nativeCallToActionTextLabel {
+    return self.ctaLabel;
 }
 
 - (NSArray *)clickableViews {
@@ -76,14 +82,28 @@
     self.ctaButton = ctaButton;
 }
 
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"ctaLabel.text"]) {
+        [self.ctaButton setTitle:change[@"new"] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Life Cycle
 
 - (instancetype)init {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 210)];
     if (self) {
         [self defaultLayout];
+        self.ctaLabel = [UILabel new];
+        [self addObserver:self forKeyPath:@"ctaLabel.text" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"ctaLabel.text"];
 }
 
 @end
