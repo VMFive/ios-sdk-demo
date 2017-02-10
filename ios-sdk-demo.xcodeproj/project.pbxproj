@@ -594,6 +594,7 @@
 				TargetAttributes = {
 					1C4CBD341CF404C100D5F62F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = W4PBB7Y8TV;
 					};
 				};
 			};
@@ -839,6 +840,7 @@
 			baseConfigurationReference = 9AE437540B6FDF291FC6BA6C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W4PBB7Y8TV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -857,6 +859,7 @@
 			baseConfigurationReference = 8F0F3D13580F3D8607643ADB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W4PBB7Y8TV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
