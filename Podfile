@@ -1,7 +1,14 @@
-platform:ios, '9.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'VMFiveAdNetwork', '~> 3.0.2'
-pod 'GoogleMobileAds', '~> 7.8.0'
-pod 'mopub-ios-sdk', '~> 4.7.0'
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+target 'ios-sdk-demo' do
+    project 'ios-sdk-demo'
+
+    pod 'VMFiveAdNetwork', '~> 3.1.1'
+    pod 'GoogleMobileAds', '~> 7.8.0'
+    pod 'mopub-ios-sdk', '~> 4.7.0'
+
+end
 
