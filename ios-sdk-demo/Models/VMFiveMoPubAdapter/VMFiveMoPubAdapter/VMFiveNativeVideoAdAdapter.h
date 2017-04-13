@@ -15,12 +15,13 @@
 @property (nonatomic, readonly) NSArray *impressionTrackerURLs;
 @property (nonatomic, readonly) NSArray *clickTrackerURLs;
 
++ (NSString *)version;
+
 - (instancetype)initWithNativeAd:(VANativeAd *)natvieAd withOtherInfos:(NSDictionary *)otherInfos;
 - (instancetype)initWithAdProperties:(NSMutableDictionary *)properties;
 
 - (void)handleVideoViewImpression;
 - (void)handleVideoViewClick;
-
 - (void)handleVideoHasProgressedToTime:(NSTimeInterval)playbackTime;
 
 @end

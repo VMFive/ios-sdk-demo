@@ -34,6 +34,7 @@
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+    [MPInterstitialAdController removeSharedInterstitialAdController:interstitial];
 }
 
 #pragma mark - Life Cycle

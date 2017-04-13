@@ -14,4 +14,6 @@
 
 @interface VMFiveInterstitialCustomEvent : MPInterstitialCustomEvent
 
++ (NSString *)version;
+
 @end
