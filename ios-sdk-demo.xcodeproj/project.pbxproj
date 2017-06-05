@@ -66,6 +66,10 @@
 		1CD15BC21D1ADE5A00498489 /* AdMobInterstitialSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD15BC01D1ADE5A00498489 /* AdMobInterstitialSampleViewController.m */; };
 		1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD15BC11D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib */; };
 		1CD8F7BB1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */; };
+		1CF6BD461EE525B4004B090C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF6BD451EE525B4004B090C /* CoreLocation.framework */; };
+		1CF6BD481EE525C0004B090C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF6BD471EE525C0004B090C /* AdSupport.framework */; };
+		1CF6BD4A1EE525CB004B090C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF6BD491EE525CB004B090C /* CoreTelephony.framework */; };
+		1CF6BD4C1EE525D5004B090C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF6BD4B1EE525D5004B090C /* CoreBluetooth.framework */; };
 		65487099586FCA70563AF1C1 /* libPods-ios-sdk-demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F1510BDE0756099474ECFC /* libPods-ios-sdk-demo.a */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +169,10 @@
 		1CD15BC11D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdMobInterstitialSampleViewController.xib; sourceTree = "<group>"; };
 		1CD8F7B91D35D38C00F4BA66 /* VANativeAd+IconAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VANativeAd+IconAlignment.h"; sourceTree = "<group>"; };
 		1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VANativeAd+IconAlignment.m"; sourceTree = "<group>"; };
+		1CF6BD451EE525B4004B090C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1CF6BD471EE525C0004B090C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		1CF6BD491EE525CB004B090C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1CF6BD4B1EE525D5004B090C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		25C6B5F41D3D96B261F81DAA /* Pods-ios-sdk-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-sdk-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-sdk-demo/Pods-ios-sdk-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		B6F1510BDE0756099474ECFC /* libPods-ios-sdk-demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-sdk-demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB9AAB8B03E179577C67E58 /* Pods-ios-sdk-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-sdk-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-sdk-demo/Pods-ios-sdk-demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +183,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CF6BD4C1EE525D5004B090C /* CoreBluetooth.framework in Frameworks */,
+				1CF6BD4A1EE525CB004B090C /* CoreTelephony.framework in Frameworks */,
+				1CF6BD481EE525C0004B090C /* AdSupport.framework in Frameworks */,
+				1CF6BD461EE525B4004B090C /* CoreLocation.framework in Frameworks */,
 				1C4468D81D1ACF4600D863A3 /* libVMFiveAdMobAdapter.a in Frameworks */,
 				1CADD4C01D1BC50800233963 /* libVMFiveMoPubAdapter.a in Frameworks */,
 				65487099586FCA70563AF1C1 /* libPods-ios-sdk-demo.a in Frameworks */,
@@ -546,6 +558,10 @@
 		6EC1AC342436E772995129E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1CF6BD4B1EE525D5004B090C /* CoreBluetooth.framework */,
+				1CF6BD491EE525CB004B090C /* CoreTelephony.framework */,
+				1CF6BD471EE525C0004B090C /* AdSupport.framework */,
+				1CF6BD451EE525B4004B090C /* CoreLocation.framework */,
 				B6F1510BDE0756099474ECFC /* libPods-ios-sdk-demo.a */,
 			);
 			name = Frameworks;
@@ -594,6 +610,7 @@
 				TargetAttributes = {
 					1C4CBD341CF404C100D5F62F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = W4PBB7Y8TV;
 					};
 				};
 			};
@@ -839,6 +856,7 @@
 			baseConfigurationReference = 25C6B5F41D3D96B261F81DAA /* Pods-ios-sdk-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W4PBB7Y8TV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -857,6 +875,7 @@
 			baseConfigurationReference = DAB9AAB8B03E179577C67E58 /* Pods-ios-sdk-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W4PBB7Y8TV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
