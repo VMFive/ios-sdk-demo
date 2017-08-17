@@ -8,10 +8,14 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "VASTSample.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [VASTSample fetch: ^(NSString *vastString) {
+        NSLog(@"===== %@", vastString);
+    }];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MainViewController new]];
     [self.window makeKeyAndVisible];
