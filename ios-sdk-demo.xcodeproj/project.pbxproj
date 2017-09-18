@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C010B521F6BB70900F27728 /* MoPubSplashSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C010B501F6BB70900F27728 /* MoPubSplashSampleViewController.m */; };
+		1C010B531F6BB70900F27728 /* MoPubSplashSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C010B511F6BB70900F27728 /* MoPubSplashSampleViewController.xib */; };
 		1C1BA1731D2A44AB0059B062 /* PetImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA1711D2A44AB0059B062 /* PetImageTableViewCell.m */; };
 		1C1BA1741D2A44AB0059B062 /* PetImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA1721D2A44AB0059B062 /* PetImageTableViewCell.xib */; };
 		1C1BA1781D2A5B3E0059B062 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA1761D2A5B3E0059B062 /* NoteTableViewCell.m */; };
@@ -26,6 +28,8 @@
 		1C32A2361D1244CB0031B681 /* NativeAdSample6ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C32A2341D1244CB0031B681 /* NativeAdSample6ViewController.xib */; };
 		1C32A23A1D1247AC0031B681 /* SampleView4.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C32A2391D1247AC0031B681 /* SampleView4.m */; };
 		1C32A23C1D1247BE0031B681 /* SampleView4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C32A23B1D1247BE0031B681 /* SampleView4.xib */; };
+		1C3C7B1A1F6BB05100620D30 /* SplashSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3C7B181F6BB05100620D30 /* SplashSampleViewController.m */; };
+		1C3C7B1B1F6BB05100620D30 /* SplashSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C3C7B191F6BB05100620D30 /* SplashSampleViewController.xib */; };
 		1C410D8A1D07C77E0078D9A1 /* NativeAdSample5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C410D881D07C77E0078D9A1 /* NativeAdSample5ViewController.m */; };
 		1C410D8B1D07C77E0078D9A1 /* NativeAdSample5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C410D891D07C77E0078D9A1 /* NativeAdSample5ViewController.xib */; };
 		1C410D8F1D07CB1E0078D9A1 /* YourCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C410D8D1D07CB1E0078D9A1 /* YourCollectionViewCell.m */; };
@@ -70,6 +74,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C010B4F1F6BB70900F27728 /* MoPubSplashSampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoPubSplashSampleViewController.h; sourceTree = "<group>"; };
+		1C010B501F6BB70900F27728 /* MoPubSplashSampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoPubSplashSampleViewController.m; sourceTree = "<group>"; };
+		1C010B511F6BB70900F27728 /* MoPubSplashSampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoPubSplashSampleViewController.xib; sourceTree = "<group>"; };
 		1C1BA1701D2A44AB0059B062 /* PetImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetImageTableViewCell.h; sourceTree = "<group>"; };
 		1C1BA1711D2A44AB0059B062 /* PetImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetImageTableViewCell.m; sourceTree = "<group>"; };
 		1C1BA1721D2A44AB0059B062 /* PetImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -99,6 +106,9 @@
 		1C32A2381D1247AC0031B681 /* SampleView4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleView4.h; sourceTree = "<group>"; };
 		1C32A2391D1247AC0031B681 /* SampleView4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView4.m; sourceTree = "<group>"; };
 		1C32A23B1D1247BE0031B681 /* SampleView4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView4.xib; sourceTree = "<group>"; };
+		1C3C7B171F6BB05100620D30 /* SplashSampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashSampleViewController.h; sourceTree = "<group>"; };
+		1C3C7B181F6BB05100620D30 /* SplashSampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashSampleViewController.m; sourceTree = "<group>"; };
+		1C3C7B191F6BB05100620D30 /* SplashSampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashSampleViewController.xib; sourceTree = "<group>"; };
 		1C410D871D07C77E0078D9A1 /* NativeAdSample5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdSample5ViewController.h; sourceTree = "<group>"; };
 		1C410D881D07C77E0078D9A1 /* NativeAdSample5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdSample5ViewController.m; sourceTree = "<group>"; };
 		1C410D891D07C77E0078D9A1 /* NativeAdSample5ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdSample5ViewController.xib; sourceTree = "<group>"; };
@@ -134,6 +144,7 @@
 		1C978F6F1CF466CB004270A7 /* SampleView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleView2.m; sourceTree = "<group>"; };
 		1C978F701CF466CB004270A7 /* SampleView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView2.xib; sourceTree = "<group>"; };
 		1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVMFiveMoPubAdapter.a; sourceTree = "<group>"; };
+		1CADFAEC1F6BB7D100E2647E /* VMFiveSplashCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMFiveSplashCustomEvent.h; sourceTree = "<group>"; };
 		1CB1C16A1D23F1EB00272B08 /* NativeAdSample7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdSample7ViewController.h; sourceTree = "<group>"; };
 		1CB1C16B1D23F1EB00272B08 /* NativeAdSample7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdSample7ViewController.m; sourceTree = "<group>"; };
 		1CB1C16C1D23F1EB00272B08 /* NativeAdSample7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdSample7ViewController.xib; sourceTree = "<group>"; };
@@ -184,6 +195,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C010B4E1F6BB6DD00F27728 /* MoPubSplashSampleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C010B4F1F6BB70900F27728 /* MoPubSplashSampleViewController.h */,
+				1C010B501F6BB70900F27728 /* MoPubSplashSampleViewController.m */,
+				1C010B511F6BB70900F27728 /* MoPubSplashSampleViewController.xib */,
+			);
+			path = MoPubSplashSampleViewController;
+			sourceTree = "<group>";
+		};
 		1C2CD7861CF5243C00CEE8AD /* SampleView3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +282,16 @@
 				1C32A23B1D1247BE0031B681 /* SampleView4.xib */,
 			);
 			path = SampleView4;
+			sourceTree = "<group>";
+		};
+		1C3C7B161F6BB02E00620D30 /* SplashSampleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C3C7B171F6BB05100620D30 /* SplashSampleViewController.h */,
+				1C3C7B181F6BB05100620D30 /* SplashSampleViewController.m */,
+				1C3C7B191F6BB05100620D30 /* SplashSampleViewController.xib */,
+			);
+			path = SplashSampleViewController;
 			sourceTree = "<group>";
 		};
 		1C410D861D07C7510078D9A1 /* NativeAdSample5 */ = {
@@ -381,10 +412,12 @@
 				1C2CD7961CF53AF400CEE8AD /* BannerSample */,
 				1C2CD79C1CF541A700CEE8AD /* CardSample */,
 				1C2CD7A21CF5445E00CEE8AD /* InterstitialSample */,
+				1C3C7B161F6BB02E00620D30 /* SplashSampleViewController */,
 				1CCF94831D13D5C400749F0F /* RewardedVideoSample */,
 				1C4468D91D1ACF6F00D863A3 /* AdMobBannerSample */,
 				1CD15BBE1D1ADE3F00498489 /* AdMobInterstitialSample */,
 				1CB5C2011D1B7F2E0031BFE9 /* MoPubInterstitialSample */,
+				1C010B4E1F6BB6DD00F27728 /* MoPubSplashSampleViewController */,
 				1CB5C20E1D1B93EA0031BFE9 /* MoPubNativeAdSample */,
 			);
 			path = ViewControllers;
@@ -460,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				1CB5C20A1D1B82DA0031BFE9 /* VMFiveInterstitialCustomEvent.h */,
+				1CADFAEC1F6BB7D100E2647E /* VMFiveSplashCustomEvent.h */,
 				1CB5C20B1D1B82DA0031BFE9 /* VMFiveNativeVideoAdAdapter.h */,
 				1CB5C20C1D1B82DA0031BFE9 /* VMFiveNativeVideoCustomEvent.h */,
 			);
@@ -631,10 +665,12 @@
 				1C978F6C1CF46553004270A7 /* NativeAdSample2ViewController.xib in Resources */,
 				1C4CBD451CF404C100D5F62F /* Assets.xcassets in Resources */,
 				1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */,
+				1C3C7B1B1F6BB05100620D30 /* SplashSampleViewController.xib in Resources */,
 				1CD109781CF4242600B454D2 /* SampleView1.xib in Resources */,
 				1CCF94881D13D5FF00749F0F /* RewardedVideoSampleViewController.xib in Resources */,
 				1C4468DE1D1ACF8500D863A3 /* AdMobBannerSampleViewController.xib in Resources */,
 				1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */,
+				1C010B531F6BB70900F27728 /* MoPubSplashSampleViewController.xib in Resources */,
 				1C1BA1791D2A5B3E0059B062 /* NoteTableViewCell.xib in Resources */,
 				1CB5C2061D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.xib in Resources */,
 				1C7335D41CF45D0F0040D7D6 /* DemoList.plist in Resources */,
@@ -706,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C41C85D1CFC200100970659 /* VANativeAd+FullscreenIcon.m in Sources */,
+				1C010B521F6BB70900F27728 /* MoPubSplashSampleViewController.m in Sources */,
 				1C410D8F1D07CB1E0078D9A1 /* YourCollectionViewCell.m in Sources */,
 				1C4468DD1D1ACF8500D863A3 /* AdMobBannerSampleViewController.m in Sources */,
 				1CD1097D1CF430AD00B454D2 /* NativeAdSample1ViewController.m in Sources */,
@@ -725,6 +762,7 @@
 				1C2CD7941CF5378E00CEE8AD /* NativeAdSample3ViewController.m in Sources */,
 				1CD109761CF4241400B454D2 /* SampleView1.m in Sources */,
 				1C4CBD3A1CF404C100D5F62F /* main.m in Sources */,
+				1C3C7B1A1F6BB05100620D30 /* SplashSampleViewController.m in Sources */,
 				1C2CD7A61CF5447500CEE8AD /* InterstitialSampleViewController.m in Sources */,
 				1CD8F7BB1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m in Sources */,
 				1C32A23A1D1247AC0031B681 /* SampleView4.m in Sources */,
