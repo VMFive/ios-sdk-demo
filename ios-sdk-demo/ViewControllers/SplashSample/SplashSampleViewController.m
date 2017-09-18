@@ -18,7 +18,7 @@
 
 #pragma mark - VAAdSplashDelegate
 
--(void)splashAdDidLoad:(VAAdSplash *)splashAd {
+- (void)splashAdDidLoad:(VAAdSplash *)splashAd {
     NSLog(@"%s", sel_getName(_cmd));
     [self.splash showAdFromViewController:self];
 }
@@ -45,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.splash = [[VAAdSplash alloc] initWithplacement:@"VMFiveAdNetwork_InterstitialSample" adType:kVAAdTypeVideoSplash];
+    self.splash = [[VAAdSplash alloc] initWithplacement:@"VMFiveAdNetwork_SplashSample" adType:kVAAdTypeVideoSplash];
     self.splash.testMode = YES;
     self.splash.apiKey = @"YOUR API KEY HERE";
     self.splash.delegate = self;

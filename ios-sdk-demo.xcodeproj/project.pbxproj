@@ -195,14 +195,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C010B4E1F6BB6DD00F27728 /* MoPubSplashSampleViewController */ = {
+		1C010B4E1F6BB6DD00F27728 /* MoPubSplashSample */ = {
 			isa = PBXGroup;
 			children = (
 				1C010B4F1F6BB70900F27728 /* MoPubSplashSampleViewController.h */,
 				1C010B501F6BB70900F27728 /* MoPubSplashSampleViewController.m */,
 				1C010B511F6BB70900F27728 /* MoPubSplashSampleViewController.xib */,
 			);
-			path = MoPubSplashSampleViewController;
+			path = MoPubSplashSample;
 			sourceTree = "<group>";
 		};
 		1C2CD7861CF5243C00CEE8AD /* SampleView3 */ = {
@@ -284,14 +284,14 @@
 			path = SampleView4;
 			sourceTree = "<group>";
 		};
-		1C3C7B161F6BB02E00620D30 /* SplashSampleViewController */ = {
+		1C3C7B161F6BB02E00620D30 /* SplashSample */ = {
 			isa = PBXGroup;
 			children = (
 				1C3C7B171F6BB05100620D30 /* SplashSampleViewController.h */,
 				1C3C7B181F6BB05100620D30 /* SplashSampleViewController.m */,
 				1C3C7B191F6BB05100620D30 /* SplashSampleViewController.xib */,
 			);
-			path = SplashSampleViewController;
+			path = SplashSample;
 			sourceTree = "<group>";
 		};
 		1C410D861D07C7510078D9A1 /* NativeAdSample5 */ = {
@@ -412,12 +412,12 @@
 				1C2CD7961CF53AF400CEE8AD /* BannerSample */,
 				1C2CD79C1CF541A700CEE8AD /* CardSample */,
 				1C2CD7A21CF5445E00CEE8AD /* InterstitialSample */,
-				1C3C7B161F6BB02E00620D30 /* SplashSampleViewController */,
+				1C3C7B161F6BB02E00620D30 /* SplashSample */,
 				1CCF94831D13D5C400749F0F /* RewardedVideoSample */,
 				1C4468D91D1ACF6F00D863A3 /* AdMobBannerSample */,
 				1CD15BBE1D1ADE3F00498489 /* AdMobInterstitialSample */,
 				1CB5C2011D1B7F2E0031BFE9 /* MoPubInterstitialSample */,
-				1C010B4E1F6BB6DD00F27728 /* MoPubSplashSampleViewController */,
+				1C010B4E1F6BB6DD00F27728 /* MoPubSplashSample */,
 				1CB5C20E1D1B93EA0031BFE9 /* MoPubNativeAdSample */,
 			);
 			path = ViewControllers;
