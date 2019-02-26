@@ -1,17 +1,24 @@
 //
 //  MPInterstitialCustomEventAdapter.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPInterstitialCustomEventAdapter.h"
 
 #import "MPAdConfiguration.h"
+#import "MPAdTargeting.h"
+#import "MPConstants.h"
+#import "MPCoreInstanceProvider.h"
+#import "MPError.h"
+#import "MPHTMLInterstitialCustomEvent.h"
 #import "MPLogging.h"
-#import "MPInstanceProvider.h"
 #import "MPInterstitialCustomEvent.h"
 #import "MPInterstitialAdController.h"
+#import "MPMRAIDInterstitialCustomEvent.h"
+#import "MPRealTimeTimer.h"
 
 @interface MPInterstitialCustomEventAdapter ()
 
@@ -19,6 +26,7 @@
 @property (nonatomic, strong) MPAdConfiguration *configuration;
 @property (nonatomic, assign) BOOL hasTrackedImpression;
 @property (nonatomic, assign) BOOL hasTrackedClick;
+@property (nonatomic, strong) MPRealTimeTimer *expirationTimer;
 
 @end
 
@@ -42,18 +50,23 @@
     [[MPCoreInstanceProvider sharedProvider] keepObjectAliveForCurrentRunLoopIteration:_interstitialCustomEvent];
 }
 
-- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration
+- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration targeting:(MPAdTargeting *)targeting
 {
     MPLogInfo(@"Looking for custom event class named %@.", configuration.customEventClass);
     self.configuration = configuration;
 
-    self.interstitialCustomEvent = [[MPInstanceProvider sharedProvider] buildInterstitialCustomEventFromCustomClass:configuration.customEventClass delegate:self];
-
-    if (self.interstitialCustomEvent) {
-        [self.interstitialCustomEvent requestInterstitialWithCustomEventInfo:configuration.customEventClassData];
-    } else {
-        [self.delegate adapter:self didFailToLoadAdWithError:nil];
+    MPInterstitialCustomEvent *customEvent = [[configuration.customEventClass alloc] init];
+    if (![customEvent isKindOfClass:[MPInterstitialCustomEvent class]]) {
+        NSError * error = [NSError customEventClass:configuration.customEventClass doesNotInheritFrom:MPInterstitialCustomEvent.class];
+        MPLogEvent([MPLogEvent error:error message:nil]);
+        [self.delegate adapter:self didFailToLoadAdWithError:error];
+        return;
     }
+    customEvent.delegate = self;
+    customEvent.localExtras = targeting.localExtras;
+    self.interstitialCustomEvent = customEvent;
+
+    [self.interstitialCustomEvent requestInterstitialWithCustomEventInfo:configuration.customEventClassData adMarkup:configuration.advancedBidPayload];
 }
 
 - (void)showInterstitialFromViewController:(UIViewController *)controller
@@ -83,6 +96,21 @@
 {
     [self didStopLoading];
     [self.delegate adapterDidFinishLoadingAd:self];
+
+    // Check for MoPub-specific custom events before setting the timer
+    if ([customEvent isKindOfClass:[MPHTMLInterstitialCustomEvent class]]
+        || [customEvent isKindOfClass:[MPMRAIDInterstitialCustomEvent class]]) {
+        // Set up timer for expiration
+        __weak __typeof__(self) weakSelf = self;
+        self.expirationTimer = [[MPRealTimeTimer alloc] initWithInterval:[MPConstants adsExpirationInterval] block:^(MPRealTimeTimer *timer){
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            if (strongSelf && !strongSelf.hasTrackedImpression) {
+                [strongSelf interstitialCustomEventDidExpire:strongSelf.interstitialCustomEvent];
+            }
+            [strongSelf.expirationTimer invalidate];
+        }];
+        [self.expirationTimer scheduleNow];
+    }
 }
 
 - (void)interstitialCustomEvent:(MPInterstitialCustomEvent *)customEvent
@@ -100,7 +128,6 @@
 - (void)interstitialCustomEventDidAppear:(MPInterstitialCustomEvent *)customEvent
 {
     if ([self.interstitialCustomEvent enableAutomaticImpressionAndClickTracking] && !self.hasTrackedImpression) {
-        self.hasTrackedImpression = YES;
         [self trackImpression];
     }
     [self.delegate interstitialDidAppearForAdapter:self];
@@ -134,6 +161,12 @@
 - (void)interstitialCustomEventWillLeaveApplication:(MPInterstitialCustomEvent *)customEvent
 {
     [self.delegate interstitialWillLeaveApplicationForAdapter:self];
+}
+
+- (void)trackImpression {
+    [super trackImpression];
+    self.hasTrackedImpression = YES;
+    [self.expirationTimer invalidate];
 }
 
 @end

@@ -1,16 +1,17 @@
 //
 //  MPAdView.m
-//  MoPub
 //
-//  Created by Nafis Jamal on 1/19/11.
-//  Copyright 2011 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdView.h"
-#import "MPClosableView.h"
+#import "MPAdTargeting.h"
 #import "MPBannerAdManager.h"
-#import "MPInstanceProvider.h"
 #import "MPBannerAdManagerDelegate.h"
+#import "MPClosableView.h"
+#import "MPCoreInstanceProvider.h"
 #import "MPLogging.h"
 
 @interface MPAdView () <MPBannerAdManagerDelegate>
@@ -23,15 +24,6 @@
 @end
 
 @implementation MPAdView
-@synthesize location = _location;
-@synthesize adManager = _adManager;
-@synthesize adUnitId = _adUnitId;
-@synthesize keywords = _keywords;
-@synthesize delegate = _delegate;
-@synthesize originalSize = _originalSize;
-@synthesize testing = _testing;
-@synthesize adContentView = _adContentView;
-@synthesize allowedNativeAdOrientation = _allowedNativeAdOrientation;
 
 #pragma mark -
 #pragma mark Lifecycle
@@ -46,7 +38,8 @@
         self.originalSize = size;
         self.allowedNativeAdOrientation = MPNativeAdOrientationAny;
         self.adUnitId = (adUnitId) ? adUnitId : DEFAULT_PUB_ID;
-        self.adManager = [[MPInstanceProvider sharedProvider] buildMPBannerAdManagerWithDelegate:self];
+        self.adManager = [[MPBannerAdManager alloc] initWithDelegate:self];
+        self.userInteractionEnabled = NO;
     }
     return self;
 }
@@ -63,6 +56,10 @@
     [self.adContentView removeFromSuperview];
     _adContentView = view;
     [self addSubview:view];
+
+    if (view != nil) {
+        self.userInteractionEnabled = YES;
+    }
 }
 
 - (CGSize)adContentViewSize
@@ -82,7 +79,13 @@
 
 - (void)loadAd
 {
-    [self.adManager loadAd];
+    MPAdTargeting * targeting = [[MPAdTargeting alloc] init];
+    targeting.keywords = self.keywords;
+    targeting.localExtras = self.localExtras;
+    targeting.location = self.location;
+    targeting.userDataKeywords = self.userDataKeywords;
+
+    [self.adManager loadAdWithTargeting:targeting];
 }
 
 - (void)refreshAd

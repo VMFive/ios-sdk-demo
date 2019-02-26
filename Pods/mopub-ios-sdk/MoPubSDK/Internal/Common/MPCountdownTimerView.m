@@ -1,8 +1,9 @@
 //
 //  MPCountdownTimerView.m
-//  MoPubSDK
 //
-//  Copyright © 2016 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPCountdownTimerView.h"
@@ -150,7 +151,7 @@ static const NSTimeInterval kCountdownTimerInterval = 0.05;
         html = [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
 
         if (html == nil) {
-            MPLogError(@"Could not find MPCountdownTimer.html in bundle %@", parentBundle.bundlePath);
+            MPLogInfo(@"Could not find MPCountdownTimer.html in bundle %@", parentBundle.bundlePath);
         }
     }
 

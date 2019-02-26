@@ -1,17 +1,15 @@
 //
 //  MPLastResortDelegate.h
-//  MoPub
 //
-//  Copyright (c) 2013 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
-@interface MPLastResortDelegate : NSObject
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
-<SKStoreProductViewControllerDelegate>
-#endif
+@interface MPLastResortDelegate : NSObject <SKStoreProductViewControllerDelegate>
 
 + (id)sharedDelegate;
 

@@ -1,8 +1,9 @@
 //
 //  MPAdWebViewAgent.h
-//  MoPub
 //
-//  Copyright (c) 2013 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
@@ -19,11 +20,14 @@ typedef NSUInteger MPAdWebViewEvent;
 
 @class MPAdConfiguration;
 @class CLLocation;
+@class MPViewabilityTracker;
 
 @interface MPAdWebViewAgent : NSObject <MPWebViewDelegate, MPAdDestinationDisplayAgentDelegate>
 
 @property (nonatomic, strong) MPWebView *view;
 @property (nonatomic, weak) id<MPAdWebViewAgentDelegate> delegate;
+
+@property (nonatomic, strong, readonly) MPViewabilityTracker *viewabilityTracker;
 
 - (id)initWithAdWebViewFrame:(CGRect)frame delegate:(id<MPAdWebViewAgentDelegate>)delegate;
 - (void)loadConfiguration:(MPAdConfiguration *)configuration;
@@ -33,6 +37,8 @@ typedef NSUInteger MPAdWebViewEvent;
 
 - (void)enableRequestHandling;
 - (void)disableRequestHandling;
+
+- (void)startViewabilityTracker;
 
 @end
 

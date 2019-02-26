@@ -1,8 +1,9 @@
 //
 //  MPRewardedVideoError.h
-//  MoPubSDK
 //
-//  Copyright (c) 2015 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +17,10 @@ typedef enum {
     MPRewardedVideoAdErrorInvalidCustomEvent = -1200,
     MPRewardedVideoAdErrorMismatchingAdTypes = -1300,
     MPRewardedVideoAdErrorAdAlreadyPlayed = -1400,
-    MPRewardedVideoAdErrorInvalidAdUnitID = -1500
+    MPRewardedVideoAdErrorNoAdReady = -1401,
+    MPRewardedVideoAdErrorInvalidAdUnitID = -1500,
+    MPRewardedVideoAdErrorInvalidReward = -1600,
+    MPRewardedVideoAdErrorNoRewardSelected = -1601,
 } MPRewardedVideoErrorCode;
 
 extern NSString * const MoPubRewardedVideoAdsSDKDomain;

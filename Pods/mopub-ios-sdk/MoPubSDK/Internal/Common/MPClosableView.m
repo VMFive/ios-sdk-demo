@@ -1,13 +1,15 @@
 //
 //  MPClosableView.m
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPClosableView.h"
-#import "MPInstanceProvider.h"
+#import "MPGlobal.h"
 #import "MPUserInteractionGestureRecognizer.h"
+#import "MPWebView.h"
 
 static CGFloat kCloseRegionWidth = 50.0f;
 static CGFloat kCloseRegionHeight = 50.0f;
@@ -51,7 +53,7 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
 @interface MPClosableView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong, readwrite) UIButton *closeButton;
 @property (nonatomic, strong) UIImage *closeButtonImage;
 @property (nonatomic, strong) MPUserInteractionGestureRecognizer *userInteractionRecognizer;
 @property (nonatomic, assign) BOOL wasTapped;
@@ -60,14 +62,19 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
 @implementation MPClosableView
 
-- (instancetype)initWithFrame:(CGRect)frame closeButtonType:(MPClosableViewCloseButtonType)closeButtonType
-{
+- (instancetype)initWithFrame:(CGRect)frame
+                      webView:(MPWebView *)webView
+                     delegate:(id<MPClosableViewDelegate>)delegate {
     self = [super initWithFrame:frame];
 
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.opaque = NO;
+        self.clipsToBounds = YES;
 
+        _delegate = delegate;
+
+        // Set up close button
         _closeButtonLocation = MPClosableViewCloseButtonLocationTopRight;
 
         _userInteractionRecognizer = [[MPUserInteractionGestureRecognizer alloc] initWithTarget:self action:@selector(handleInteraction:)];
@@ -83,9 +90,13 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
         [_closeButton addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
-        [self setCloseButtonType:closeButtonType];
+        [self setCloseButtonType:MPClosableViewCloseButtonTypeTappableWithImage];
 
         [self addSubview:_closeButton];
+
+        // Set up web view
+        webView.frame = self.bounds;
+        [self addSubview:webView];
     }
 
     return self;
@@ -99,7 +110,55 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 
 - (void)layoutSubviews
 {
-    self.closeButton.frame = MPClosableViewCustomCloseButtonFrame(self.bounds.size, self.closeButtonLocation);
+    if (@available(iOS 11, *)) {
+        self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
+
+        NSMutableArray <NSLayoutConstraint *> *constraints = [NSMutableArray arrayWithObjects:
+                                                              [self.closeButton.widthAnchor constraintEqualToConstant:kCloseRegionWidth],
+                                                              [self.closeButton.heightAnchor constraintEqualToConstant:kCloseRegionHeight],
+                                                              nil];
+
+        switch (self.closeButtonLocation) {
+            case MPClosableViewCloseButtonLocationTopRight:
+                [constraints addObject:[self.closeButton.trailingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.trailingAnchor]];
+                [constraints addObject:[self.closeButton.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationTopLeft:
+                [constraints addObject:[self.closeButton.leadingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leadingAnchor]];
+                [constraints addObject:[self.closeButton.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationTopCenter:
+                [constraints addObject:[self.closeButton.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor]];
+                [constraints addObject:[self.closeButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationBottomRight:
+                [constraints addObject:[self.closeButton.trailingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.trailingAnchor]];
+                [constraints addObject:[self.closeButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationBottomLeft:
+                [constraints addObject:[self.closeButton.leadingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.leadingAnchor]];
+                [constraints addObject:[self.closeButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationBottomCenter:
+                [constraints addObject:[self.closeButton.bottomAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.bottomAnchor]];
+                [constraints addObject:[self.closeButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
+                break;
+            case MPClosableViewCloseButtonLocationCenter:
+                [constraints addObject:[self.closeButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
+                [constraints addObject:[self.closeButton.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]];
+                break;
+            default:
+                // Top-right default
+                [constraints addObject:[self.closeButton.trailingAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.trailingAnchor]];
+                [constraints addObject:[self.closeButton.topAnchor constraintEqualToAnchor:self.safeAreaLayoutGuide.topAnchor]];
+                break;
+        }
+
+        [NSLayoutConstraint activateConstraints:constraints];
+    } else {
+        self.closeButton.frame = MPClosableViewCustomCloseButtonFrame(self.bounds.size, self.closeButtonLocation);
+    }
+
     [self bringSubviewToFront:self.closeButton];
 }
 

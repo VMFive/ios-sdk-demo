@@ -51,7 +51,6 @@
 		1C978F6C1CF46553004270A7 /* NativeAdSample2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F6A1CF46553004270A7 /* NativeAdSample2ViewController.xib */; };
 		1C978F711CF466CB004270A7 /* SampleView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C978F6F1CF466CB004270A7 /* SampleView2.m */; };
 		1C978F721CF466CB004270A7 /* SampleView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C978F701CF466CB004270A7 /* SampleView2.xib */; };
-		1CADD4C01D1BC50800233963 /* libVMFiveMoPubAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */; };
 		1CB1C16D1D23F1EB00272B08 /* NativeAdSample7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1C16B1D23F1EB00272B08 /* NativeAdSample7ViewController.m */; };
 		1CB1C16E1D23F1EB00272B08 /* NativeAdSample7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CB1C16C1D23F1EB00272B08 /* NativeAdSample7ViewController.xib */; };
 		1CB5C2051D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5C2031D1B7F420031BFE9 /* MoPubInterstitialSampleViewController.m */; };
@@ -71,6 +70,7 @@
 		1CD15BC31D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD15BC11D1ADE5A00498489 /* AdMobInterstitialSampleViewController.xib */; };
 		1CD8F7BB1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8F7BA1D35D38C00F4BA66 /* VANativeAd+IconAlignment.m */; };
 		65487099586FCA70563AF1C1 /* libPods-ios-sdk-demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F1510BDE0756099474ECFC /* libPods-ios-sdk-demo.a */; };
+		7B3A1B74221CFCEA00C7EFA4 /* libVMFiveMoPubAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CADD4BF1D1BC50800233963 /* libVMFiveMoPubAdapter.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,8 +187,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C4468D81D1ACF4600D863A3 /* libVMFiveAdMobAdapter.a in Frameworks */,
-				1CADD4C01D1BC50800233963 /* libVMFiveMoPubAdapter.a in Frameworks */,
 				65487099586FCA70563AF1C1 /* libPods-ios-sdk-demo.a in Frameworks */,
+				7B3A1B74221CFCEA00C7EFA4 /* libVMFiveMoPubAdapter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +627,7 @@
 				TargetAttributes = {
 					1C4CBD341CF404C100D5F62F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = SQ5T9EG77G;
 					};
 				};
 			};
@@ -716,6 +717,7 @@
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@2x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPUnmutedBtn@3x.png",
 				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle",
+				"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Resources/MPAdapters.plist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -740,6 +742,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPUnmutedBtn@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPUnmutedBtn@3x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MRAID.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPAdapters.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -907,6 +910,7 @@
 			baseConfigurationReference = 25C6B5F41D3D96B261F81DAA /* Pods-ios-sdk-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SQ5T9EG77G;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -915,7 +919,7 @@
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveAdMobAdapter",
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveMoPubAdapter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tw.daidouji.ios-sdk-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vm5.adnsdkdemo.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -925,6 +929,7 @@
 			baseConfigurationReference = DAB9AAB8B03E179577C67E58 /* Pods-ios-sdk-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SQ5T9EG77G;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ios-sdk-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -933,7 +938,7 @@
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveAdMobAdapter",
 					"$(PROJECT_DIR)/ios-sdk-demo/Models/VMFiveMoPubAdapter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tw.daidouji.ios-sdk-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vm5.adnsdkdemo.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

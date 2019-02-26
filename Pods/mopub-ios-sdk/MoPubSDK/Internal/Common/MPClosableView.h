@@ -1,11 +1,14 @@
 //
 //  MPClosableView.h
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <UIKit/UIKit.h>
+
+@class MPWebView;
 
 enum {
     MPClosableViewCloseButtonLocationTopRight,
@@ -42,8 +45,11 @@ CGRect MPClosableViewCustomCloseButtonFrame(CGSize size, MPClosableViewCloseButt
 @property (nonatomic, assign) MPClosableViewCloseButtonType closeButtonType;
 @property (nonatomic, assign) MPClosableViewCloseButtonLocation closeButtonLocation;
 @property (nonatomic, readonly) BOOL wasTapped;
+@property (nonatomic, strong, readonly) UIButton *closeButton;
 
-- (instancetype)initWithFrame:(CGRect)frame closeButtonType:(MPClosableViewCloseButtonType)closeButtonType;
+- (instancetype)initWithFrame:(CGRect)frame
+                      webView:(MPWebView *)webView
+                     delegate:(id<MPClosableViewDelegate>)delegate;
 
 @end
 

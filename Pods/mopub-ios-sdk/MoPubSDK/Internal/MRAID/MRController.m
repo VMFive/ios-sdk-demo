@@ -1,8 +1,9 @@
 //
 //  MRController.m
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MRController.h"
@@ -16,7 +17,6 @@
 #import "MPCoreInstanceProvider.h"
 #import "MPClosableView.h"
 #import "MPGlobal.h"
-#import "MPInstanceProvider.h"
 #import "MPLogging.h"
 #import "MPTimer.h"
 #import "NSHTTPURLResponse+MPAdditions.h"
@@ -24,6 +24,10 @@
 #import "UIWebView+MPAdditions.h"
 #import "MPForceableOrientationProtocol.h"
 #import "MPAPIEndPoints.h"
+#import "MoPub.h"
+#import "MPViewabilityTracker.h"
+#import "MPHTTPNetworkSession.h"
+#import "MPURLRequest.h"
 
 static const NSTimeInterval kAdPropertyUpdateTimerInterval = 1.0;
 static const NSTimeInterval kMRAIDResizeAnimationTimeInterval = 0.3;
@@ -43,8 +47,6 @@ static NSString *const kMRAIDCommandResize = @"resize";
 @property (nonatomic, assign) MRAdViewPlacementType placementType;
 @property (nonatomic, strong) MRExpandModalViewController *expandModalViewController;
 @property (nonatomic, weak) MPMRAIDInterstitialViewController *interstitialViewController;
-@property (nonatomic, strong) NSMutableData *twoPartExpandData;
-@property (nonatomic, assign) NSStringEncoding responseEncoding;
 @property (nonatomic, assign) CGRect mraidDefaultAdFrame;
 @property (nonatomic, assign) CGRect mraidDefaultAdFrameInKeyWindow;
 @property (nonatomic, assign) CGSize currentAdSize;
@@ -59,7 +61,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 // Whether or not an interstitial requires precaching.  Does not affect banners.
 @property (nonatomic, assign) BOOL adRequiresPrecaching;
 @property (nonatomic, assign) BOOL isAdVastVideoPlayer;
-@property (nonatomic, assign) BOOL firedReadyEventForDefaultAd;
+@property (nonatomic, assign) BOOL didConfigureOrientationNotificationObservers;
 
 // Points to mraidAdView (one-part expand) or mraidAdViewTwoPart (two-part expand) while expanded.
 @property (nonatomic, strong) MPClosableView *expansionContentView;
@@ -73,20 +75,29 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 @property (nonatomic, assign) UIInterfaceOrientation currentInterfaceOrientation;
 
-@property (nonatomic, copy) void (^forceOrientationAfterAnimationBlock)();
+@property (nonatomic, copy) void (^forceOrientationAfterAnimationBlock)(void);
+
+@property (nonatomic, readwrite) MPViewabilityTracker *viewabilityTracker;
+@property (nonatomic, readwrite) MPWebView *mraidWebView;
+
+// Networking
+@property (nonatomic, strong) NSURLSessionTask *task;
 
 @end
 
 @implementation MRController
 
-- (instancetype)initWithAdViewFrame:(CGRect)adViewFrame adPlacementType:(MRAdViewPlacementType)placementType
+- (instancetype)initWithAdViewFrame:(CGRect)adViewFrame
+              supportedOrientations:(MPInterstitialOrientationType)orientationType
+                    adPlacementType:(MRAdViewPlacementType)placementType
+                           delegate:(id<MRControllerDelegate>)delegate
 {
     if (self = [super init]) {
         _placementType = placementType;
         _currentState = MRAdViewStateDefault;
-        _forceOrientationMask = UIInterfaceOrientationMaskAll;
+        _forceOrientationMask = MPInterstitialOrientationTypeToUIInterfaceOrientationMask(orientationType);
         _isAnimatingAdSize = NO;
-        _firedReadyEventForDefaultAd = NO;
+        _didConfigureOrientationNotificationObservers = NO;
         _currentAdSize = CGSizeZero;
 
         _mraidDefaultAdFrame = adViewFrame;
@@ -107,11 +118,12 @@ static NSString *const kMRAIDCommandResize = @"resize";
         _resizeBackgroundView = [[UIView alloc] initWithFrame:adViewFrame];
         _resizeBackgroundView.backgroundColor = [UIColor clearColor];
 
-
-        _destinationDisplayAgent = [[MPCoreInstanceProvider sharedProvider] buildMPAdDestinationDisplayAgentWithDelegate:self];
+        _destinationDisplayAgent = [MPAdDestinationDisplayAgent agentWithDelegate:self];
 
         _adAlertManager = [[MPCoreInstanceProvider sharedProvider] buildMPAdAlertManagerWithDelegate:self];
         _adAlertManagerTwoPart = [[MPCoreInstanceProvider sharedProvider] buildMPAdAlertManagerWithDelegate:self];
+
+        _delegate = delegate;
     }
 
     return self;
@@ -119,6 +131,8 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)dealloc
 {
+    [self.viewabilityTracker stopTracking];
+
     // Transfer delegation to the expand modal view controller in the event the modal is still being presented so it can dismiss itself.
     _expansionContentView.delegate = _expandModalViewController;
 
@@ -134,15 +148,16 @@ static NSString *const kMRAIDCommandResize = @"resize";
     self.isAdLoading = YES;
     self.adRequiresPrecaching = configuration.precacheRequired;
     self.isAdVastVideoPlayer = configuration.isVastVideoPlayer;
-    self.shouldUseUIWebView = self.isAdVastVideoPlayer || self.adConfiguration.forceUIWebView;
+    self.shouldUseUIWebView = self.isAdVastVideoPlayer;
 
-    MPWebView *webView = [self buildMRAIDWebViewWithFrame:self.mraidDefaultAdFrame
-                                           forceUIWebView:self.shouldUseUIWebView];
+    self.mraidWebView = [self buildMRAIDWebViewWithFrame:self.mraidDefaultAdFrame
+                                          forceUIWebView:self.shouldUseUIWebView];
+    self.mraidWebView.shouldConformToSafeArea = [self isInterstitialAd];
 
-    self.mraidBridge = [[MPInstanceProvider sharedProvider] buildMRBridgeWithWebView:webView delegate:self];
-    self.mraidAdView = [[MPInstanceProvider sharedProvider] buildMRAIDMPClosableViewWithFrame:self.mraidDefaultAdFrame
-                                                                                      webView:webView
-                                                                                     delegate:self];
+    self.mraidBridge = [[MRBridge alloc] initWithWebView:self.mraidWebView delegate:self];
+    self.mraidAdView = [[MPClosableView alloc] initWithFrame:self.mraidDefaultAdFrame
+                                                     webView:self.mraidWebView
+                                                    delegate:self];
     if (self.placementType == MRAdViewPlacementTypeInterstitial) {
         self.mraidAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
@@ -156,18 +171,36 @@ static NSString *const kMRAIDCommandResize = @"resize";
         self.mraidAdView.closeButtonType = MPClosableViewCloseButtonTypeTappableWithImage;
     }
 
+    [self init3rdPartyViewabilityTrackers];
+
     // This load is guaranteed to never be called for a two-part expand so we know we need to load the HTML into the default web view.
     NSString *HTML = [configuration adResponseHTMLString];
     [self.mraidBridge loadHTMLString:HTML
                              baseURL:[NSURL URLWithString:[MPAPIEndpoints baseURL]]
      ];
+
+}
+
+- (void)handleMRAIDInterstitialWillPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController
+{
+    self.interstitialViewController = viewController;
+    [self updateOrientation];
+    [self willBeginAnimatingAdSize];
 }
 
 - (void)handleMRAIDInterstitialDidPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController
 {
     self.interstitialViewController = viewController;
-    [self enableRequestHandling];
-    [self checkViewability];
+    [self didEndAnimatingAdSize];
+    [self updateMRAIDProperties];
+    [self updateOrientation];
+
+    // If viewability tracking has been deferred (i.e., if this is a non-banner ad), start tracking here now that the
+    // ad has been presented. If viewability tracking was not deferred, we're already tracking and there's no need to
+    // call start tracking.
+    if (![self shouldStartViewabilityDuringInitialization]) {
+        [self.viewabilityTracker startTracking];
+    }
 }
 
 - (void)enableRequestHandling
@@ -188,35 +221,27 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self.destinationDisplayAgent cancel];
 }
 
-#pragma mark - Loading Two Part Expand (NSURLConnectionDelegate)
+#pragma mark - Loading Two Part Expand
 
 - (void)loadTwoPartCreativeFromURL:(NSURL *)url
 {
     self.isAdLoading = YES;
 
-    NSURLConnection *connection = [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
-    if (connection) {
-        self.twoPartExpandData = [NSMutableData data];
-    }
+    MPURLRequest * request = [MPURLRequest requestWithURL:url];
+
+    __weak __typeof__(self) weakSelf = self;
+    self.task = [MPHTTPNetworkSession startTaskWithHttpRequest:request responseHandler:^(NSData * _Nonnull data, NSHTTPURLResponse * _Nonnull response) {
+        __typeof__(self) strongSelf = weakSelf;
+
+        NSURL *currentRequestUrl = strongSelf.task.currentRequest.URL;
+        [strongSelf connectionDidFinishLoadingData:data withResponse:response fromRequestUrl:currentRequestUrl];
+    } errorHandler:^(NSError * _Nonnull error) {
+        __typeof__(self) strongSelf = weakSelf;
+        [strongSelf didFailWithError:error];
+    }];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [self.twoPartExpandData setLength:0];
-
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-
-    NSDictionary *headers = [httpResponse allHeaderFields];
-    NSString *contentType = [headers objectForKey:kMoPubHTTPHeaderContentType];
-    self.responseEncoding = [httpResponse stringEncodingFromContentType:contentType];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [self.twoPartExpandData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void)didFailWithError:(NSError *)error
 {
     self.isAdLoading = NO;
     // No matter what, show the close button on the expanded view.
@@ -224,13 +249,43 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self.mraidBridge fireErrorEventForAction:kMRAIDCommandExpand withMessage:@"Could not load URL."];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)connectionDidFinishLoadingData:(NSData *)data withResponse:(NSHTTPURLResponse *)response fromRequestUrl:(NSURL *)requestUrl
 {
-    NSString *str = [[NSString alloc] initWithData:self.twoPartExpandData encoding:self.responseEncoding];
-    [self.mraidBridgeTwoPart loadHTMLString:str baseURL:connection.currentRequest.URL];
+    // Extract the response encoding type.
+    NSDictionary *headers = [response allHeaderFields];
+    NSString *contentType = [headers objectForKey:kMoPubHTTPHeaderContentType];
+    NSStringEncoding responseEncoding = [response stringEncodingFromContentType:contentType];
+
+    NSString *str = [[NSString alloc] initWithData:data encoding:responseEncoding];
+    [self.mraidBridgeTwoPart loadHTMLString:str baseURL:requestUrl];
 }
 
 #pragma mark - Private
+
+- (void)init3rdPartyViewabilityTrackers
+{
+    self.viewabilityTracker = [[MPViewabilityTracker alloc]
+                               initWithAdView:self.mraidWebView
+                               isVideo:self.isAdVastVideoPlayer
+                               startTrackingImmediately:[self shouldStartViewabilityDuringInitialization]];
+    [self.viewabilityTracker registerFriendlyObstructionView:self.mraidAdView.closeButton];
+}
+
+- (BOOL)shouldStartViewabilityDuringInitialization
+{
+    // If viewabile impression tracking experiment is enabled, we defer viewability trackers until
+    // ad view is at least x pixels on screen for y seconds, where x and y are configurable values defined in server.
+    if (self.adConfiguration.visibleImpressionTrackingEnabled) {
+        return NO;
+    }
+
+    return ![self isInterstitialAd];
+}
+
+- (BOOL)isInterstitialAd
+{
+    return (self.placementType == MRAdViewPlacementTypeInterstitial);
+}
 
 - (void)initAdAlertManager:(id<MPAdAlertManagerProtocol>)adAlertManager forAdView:(MPClosableView *)adView
 {
@@ -311,7 +366,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 #pragma mark - Executing Javascript
 
-- (void)initializeLoadedAdForBridge:(MRBridge *)bridge
+- (void)configureMraidEnvironmentToShowAdForBridge:(MRBridge *)bridge
 {
     // Set up some initial properties so mraid can operate.
     MPLogDebug(@"Injecting initial JavaScript state.");
@@ -438,7 +493,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self presentExpandModalViewControllerWithView:view animated:animated completion:nil];
 }
 
-- (void)presentExpandModalViewControllerWithView:(MPClosableView *)view animated:(BOOL)animated completion:(void (^)())completionBlock
+- (void)presentExpandModalViewControllerWithView:(MPClosableView *)view animated:(BOOL)animated completion:(void (^)(void))completionBlock
 {
     [self willBeginAnimatingAdSize];
 
@@ -619,8 +674,8 @@ static NSString *const kMRAIDCommandResize = @"resize";
         if (!self.adRequiresPrecaching) {
             // Only tell the delegate that the ad loaded when the view is the default ad view and not a two-part ad view.
             if (bridge == self.mraidBridge) {
-                // We do not intialize the javascript/fire ready event, or start our timer for a banner load yet.  We wait until
-                // the ad is in the view hierarchy. We are notified by the view when it is potentially added to the hierarchy in
+                // We do not start our timer for a banner load yet.  We wait until the ad is in the view hierarchy.
+                // We are notified by the view when it is potentially added to the hierarchy in
                 // -closableView:didMoveToWindow:.
                 [self adDidLoad];
             } else if (bridge == self.mraidBridgeTwoPart) {
@@ -634,7 +689,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
                 // We initialize javascript and fire the ready event for the two part ad view once it loads
                 // since it'll already be in the view hierarchy.
-                [self initializeLoadedAdForBridge:bridge];
+                [self configureMraidEnvironmentToShowAdForBridge:bridge];
             }
         }
     }
@@ -668,7 +723,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     } else if (command == MPMoPubHostCommandRewardedVideoEnded) {
         [self.delegate rewardedVideoEnded];
     } else {
-        MPLogWarn(@"MRController - unsupported MoPub URL: %@", [url absoluteString]);
+        MPLogInfo(@"MRController - unsupported MoPub URL: %@", [url absoluteString]);
     }
 }
 
@@ -807,8 +862,10 @@ static NSString *const kMRAIDCommandResize = @"resize";
         CGRect twoPartFrame = self.mraidAdView.frame;
 
         MPWebView *twoPartWebView = [self buildMRAIDWebViewWithFrame:twoPartFrame forceUIWebView:self.shouldUseUIWebView];
-        self.mraidBridgeTwoPart = [[MPInstanceProvider sharedProvider] buildMRBridgeWithWebView:twoPartWebView delegate:self];
-        self.mraidAdViewTwoPart = [[MPInstanceProvider sharedProvider] buildMRAIDMPClosableViewWithFrame:twoPartFrame webView:twoPartWebView delegate:self];
+        self.mraidBridgeTwoPart = [[MRBridge alloc] initWithWebView:twoPartWebView delegate:self];
+        self.mraidAdViewTwoPart = [[MPClosableView alloc] initWithFrame:twoPartFrame
+                                                                webView:twoPartWebView
+                                                               delegate:self];
         self.isAdLoading = YES;
 
         self.expansionContentView = self.mraidAdViewTwoPart;
@@ -901,7 +958,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     // Fire the ready event and initialize properties if the view has a window.
     MRBridge *bridge = [self bridgeForAdView:closableView];
 
-    if (!self.firedReadyEventForDefaultAd && bridge == self.mraidBridge) {
+    if (!self.didConfigureOrientationNotificationObservers && bridge == self.mraidBridge) {
         // The window may be nil if it was removed from a window or added to a view that isn't attached to a window so make sure it actually has a window.
         if (window != nil) {
             // Just in case this code is executed twice, ensures that self is only added as
@@ -920,8 +977,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
                                                        object:nil];
 
             [self.adPropertyUpdateTimer scheduleNow];
-            [self initializeLoadedAdForBridge:bridge];
-            self.firedReadyEventForDefaultAd = YES;
+            self.didConfigureOrientationNotificationObservers = YES;
         }
     }
 }
@@ -1007,7 +1063,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     MRBridge *activeBridge = [self bridgeForActiveAdView];
     [activeBridge fireSetCurrentPositionWithPositionRect:frame];
 
-    MPLogTrace(@"Current Position: %@", NSStringFromCGRect(frame));
+    MPLogDebug(@"Current Position: %@", NSStringFromCGRect(frame));
 }
 
 - (void)updateDefaultPosition
@@ -1018,7 +1074,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self.mraidBridge fireSetDefaultPositionWithPositionRect:defaultFrame];
     [self.mraidBridgeTwoPart fireSetDefaultPositionWithPositionRect:defaultFrame];
 
-    MPLogTrace(@"Default Position: %@", NSStringFromCGRect(defaultFrame));
+    MPLogDebug(@"Default Position: %@", NSStringFromCGRect(defaultFrame));
 }
 
 - (void)updateScreenSize
@@ -1030,7 +1086,7 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self.mraidBridge fireSetScreenSize:screenSize];
     [self.mraidBridgeTwoPart fireSetScreenSize:screenSize];
 
-    MPLogTrace(@"Screen Size: %@", NSStringFromCGSize(screenSize));
+    MPLogDebug(@"Screen Size: %@", NSStringFromCGSize(screenSize));
 }
 
 - (void)updateMaxSize
@@ -1042,7 +1098,15 @@ static NSString *const kMRAIDCommandResize = @"resize";
     [self.mraidBridge fireSetMaxSize:maxSize];
     [self.mraidBridgeTwoPart fireSetMaxSize:maxSize];
 
-    MPLogTrace(@"Max Size: %@", NSStringFromCGSize(maxSize));
+    MPLogDebug(@"Max Size: %@", NSStringFromCGSize(maxSize));
+}
+
+- (void)updateOrientation
+{
+    self.expandModalViewController.supportedOrientationMask = self.forceOrientationMask;
+    self.interstitialViewController.supportedOrientationMask = self.forceOrientationMask;
+
+    MPLogDebug(@"Orientation: %ud", (unsigned int)self.forceOrientationMask);
 }
 
 #pragma mark - MRAID events
@@ -1117,6 +1181,9 @@ static NSString *const kMRAIDCommandResize = @"resize";
 
 - (void)adDidLoad
 {
+    // Configure environment and fire ready event when ad is finished loading.
+    [self configureMraidEnvironmentToShowAdForBridge:self.mraidBridge];
+
     if ([self.delegate respondsToSelector:@selector(adDidLoad:)]) {
         [self.delegate adDidLoad:self.mraidAdView];
     }

@@ -1,8 +1,9 @@
 //
 //  MPVASTTrackingEvent.m
-//  MoPub
 //
-//  Copyright (c) 2015 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPVASTTrackingEvent.h"
@@ -35,10 +36,16 @@ NSString * const MPVASTTrackingEventTypeProgress = @"progress";
     self = [super initWithDictionary:dictionary];
     if (self) {
         _eventType = dictionary[@"event"];
+
         _URL = [self generateModelFromDictionaryValue:dictionary
                                         modelProvider:^id(NSDictionary *dictionary) {
                                             return [NSURL URLWithString:[dictionary[@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
                                         }];
+        // a tracker that does not specify a URL is not valid
+        if (_URL == nil) {
+            return nil;
+        }
+
         _progressOffset = [self generateModelFromDictionaryValue:dictionary
                                                    modelProvider:^id(NSDictionary *dictionary) {
                                                        return [[MPVASTDurationOffset alloc] initWithDictionary:dictionary];

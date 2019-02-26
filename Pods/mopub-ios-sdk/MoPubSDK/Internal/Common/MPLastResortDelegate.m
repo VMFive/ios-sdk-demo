@@ -1,8 +1,9 @@
 //
 //  MPLastResortDelegate.m
-//  MoPub
 //
-//  Copyright (c) 2013 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPLastResortDelegate.h"
@@ -27,11 +28,9 @@
     [(UIViewController *)controller dismissViewControllerAnimated:MP_ANIMATED completion:nil];
 }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
 {
     [viewController dismissViewControllerAnimated:MP_ANIMATED completion:nil];
 }
-#endif
 
 @end

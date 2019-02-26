@@ -1,8 +1,9 @@
 //
 //  MPVASTModel.h
-//  MoPub
 //
-//  Copyright (c) 2015 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
@@ -17,9 +18,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 id<MPObjectMapper> MPParseArrayOf(id<MPObjectMapper> internalMapper);
-id<MPObjectMapper> MPParseURLFromString();
+id<MPObjectMapper> MPParseURLFromString(void);
 id<MPObjectMapper> MPParseNumberFromString(NSNumberFormatterStyle numberStyle);
-id<MPObjectMapper> MPParseTimeIntervalFromDurationString();
+id<MPObjectMapper> MPParseTimeIntervalFromDurationString(void);
 id<MPObjectMapper> MPParseClass(Class destinationClass);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

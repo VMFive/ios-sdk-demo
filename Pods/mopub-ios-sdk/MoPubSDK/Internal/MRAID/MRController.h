@@ -1,8 +1,9 @@
 //
 //  MRController.h
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <UIKit/UIKit.h>
@@ -13,6 +14,8 @@
 @protocol MRControllerDelegate;
 @class MPAdConfiguration;
 @class CLLocation;
+@class MPWebView;
+@class MPViewabilityTracker;
 
 /**
  * The `MRController` class is used to load and interact with MRAID ads.
@@ -22,11 +25,17 @@
  */
 @interface MRController : NSObject
 
+@property (nonatomic, readonly) MPWebView *mraidWebView;
+@property (nonatomic, readonly) MPViewabilityTracker *viewabilityTracker;
 @property (nonatomic, weak) id<MRControllerDelegate> delegate;
 
-- (instancetype)initWithAdViewFrame:(CGRect)adViewFrame adPlacementType:(MRAdViewPlacementType)placementType;
+- (instancetype)initWithAdViewFrame:(CGRect)adViewFrame
+              supportedOrientations:(MPInterstitialOrientationType)orientationType
+                    adPlacementType:(MRAdViewPlacementType)placementType
+                           delegate:(id<MRControllerDelegate>)delegate;
 
 - (void)loadAdWithConfiguration:(MPAdConfiguration *)configuration;
+- (void)handleMRAIDInterstitialWillPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController;
 - (void)handleMRAIDInterstitialDidPresentWithViewController:(MPMRAIDInterstitialViewController *)viewController;
 - (void)enableRequestHandling;
 - (void)disableRequestHandling;

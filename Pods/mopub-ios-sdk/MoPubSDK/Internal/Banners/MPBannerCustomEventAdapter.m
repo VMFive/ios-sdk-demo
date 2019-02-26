@@ -1,31 +1,44 @@
 //
 //  MPBannerCustomEventAdapter.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPBannerCustomEventAdapter.h"
 
 #import "MPAdConfiguration.h"
+#import "MPAdTargeting.h"
 #import "MPBannerCustomEvent.h"
-#import "MPInstanceProvider.h"
+#import "MPCoreInstanceProvider.h"
+#import "MPError.h"
 #import "MPLogging.h"
+#import "MPAdImpressionTimer.h"
+#import "MPBannerCustomEvent+Internal.h"
 
-@interface MPBannerCustomEventAdapter ()
+@interface MPBannerCustomEventAdapter () <MPAdImpressionTimerDelegate>
 
 @property (nonatomic, strong) MPBannerCustomEvent *bannerCustomEvent;
 @property (nonatomic, strong) MPAdConfiguration *configuration;
 @property (nonatomic, assign) BOOL hasTrackedImpression;
 @property (nonatomic, assign) BOOL hasTrackedClick;
+@property (nonatomic) MPAdImpressionTimer *impressionTimer;
+@property (nonatomic) UIView *adView;
 
 - (void)trackClickOnce;
 
 @end
 
 @implementation MPBannerCustomEventAdapter
-@synthesize hasTrackedImpression = _hasTrackedImpression;
-@synthesize hasTrackedClick = _hasTrackedClick;
+
+- (instancetype)initWithConfiguration:(MPAdConfiguration *)configuration delegate:(id<MPBannerAdapterDelegate>)delegate
+{
+    if (!configuration.customEventClass) {
+        return nil;
+    }
+    return [self initWithDelegate:delegate];
+}
 
 - (void)unregisterDelegate
 {
@@ -44,18 +57,25 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration containerSize:(CGSize)size
+- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration targeting:(MPAdTargeting *)targeting containerSize:(CGSize)size
 {
     MPLogInfo(@"Looking for custom event class named %@.", configuration.customEventClass);
     self.configuration = configuration;
 
-    self.bannerCustomEvent = [[MPInstanceProvider sharedProvider] buildBannerCustomEventFromCustomClass:configuration.customEventClass
-                                                                                               delegate:self];
-    if (self.bannerCustomEvent) {
-        [self.bannerCustomEvent requestAdWithSize:size customEventInfo:configuration.customEventClassData];
-    } else {
-        [self.delegate adapter:self didFailToLoadAdWithError:nil];
+    MPBannerCustomEvent *customEvent = [[configuration.customEventClass alloc] init];
+    if (![customEvent isKindOfClass:[MPBannerCustomEvent class]]) {
+        NSError * error = [NSError customEventClass:configuration.customEventClass doesNotInheritFrom:MPBannerCustomEvent.class];
+        MPLogEvent([MPLogEvent error:error message:nil]);
+        [self.delegate adapter:self didFailToLoadAdWithError:error];
+        return;
     }
+
+
+    self.bannerCustomEvent = customEvent;
+    self.bannerCustomEvent.delegate = self;
+    self.bannerCustomEvent.localExtras = targeting.localExtras;
+
+    [self.bannerCustomEvent requestAdWithSize:size customEventInfo:configuration.customEventClassData adMarkup:configuration.advancedBidPayload];
 }
 
 - (void)rotateToOrientation:(UIInterfaceOrientation)newOrientation
@@ -65,12 +85,42 @@
 
 - (void)didDisplayAd
 {
-    if ([self.bannerCustomEvent enableAutomaticImpressionAndClickTracking] && !self.hasTrackedImpression) {
-        self.hasTrackedImpression = YES;
-        [self trackImpression];
+    if([self shouldTrackImpressionOnDisplay]) {
+        [self trackImpressionOnDisplay];
+    } else if (self.configuration.visibleImpressionTrackingEnabled) {
+        [self startViewableTrackingTimer];
+    } else {
+        // Mediated networks except Google AdMob
+        // no-op here.
     }
 
     [self.bannerCustomEvent didDisplayAd];
+}
+
+#pragma mark - 1px impression tracking methods
+
+- (void)trackImpressionOnDisplay
+{
+    self.hasTrackedImpression = YES;
+    [self trackImpression];
+}
+
+- (void)startViewableTrackingTimer
+{
+    self.impressionTimer = [[MPAdImpressionTimer alloc] initWithRequiredSecondsForImpression:self.configuration.impressionMinVisibleTimeInSec requiredViewVisibilityPixels:self.configuration.impressionMinVisiblePixels];
+    self.impressionTimer.delegate = self;
+    [self.impressionTimer startTrackingView:self.adView];
+}
+
+
+- (BOOL)shouldTrackImpressionOnDisplay {
+    if (self.configuration.visibleImpressionTrackingEnabled) {
+        return NO;
+    }
+    if([self.bannerCustomEvent enableAutomaticImpressionAndClickTracking] && !self.hasTrackedImpression) {
+        return YES;
+    }
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,6 +151,7 @@
 {
     [self didStopLoading];
     if (ad) {
+        self.adView = ad;
         [self.delegate adapter:self didFinishLoadingAd:ad];
     } else {
         [self.delegate adapter:self didFailToLoadAdWithError:nil];
@@ -136,6 +187,21 @@
         self.hasTrackedClick = YES;
         [self trackClick];
     }
+}
+
+#pragma mark - MPAdImpressionTimerDelegate
+
+- (void)adViewWillLogImpression:(UIView *)adView
+{
+    // Track impression for all impression trackers known by the SDK
+    [self trackImpression];
+    // Track impression for all impression trackers included in the markup
+    [self.bannerCustomEvent trackImpressionsIncludedInMarkup];
+    // Start viewability tracking
+    [self.bannerCustomEvent startViewabilityTracker];
+
+    // Notify delegate that an impression tracker was fired
+    [self.delegate adapter:self didTrackImpressionForAd:adView];
 }
 
 @end

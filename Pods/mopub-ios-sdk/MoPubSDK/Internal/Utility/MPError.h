@@ -1,13 +1,14 @@
 //
 //  MPError.h
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kMOPUBErrorDomain;
+extern NSString * const kNSErrorDomain;
 
 typedef enum {
     MOPUBErrorUnknown = -1,
@@ -17,11 +18,47 @@ typedef enum {
     MOPUBErrorServerError = 8,
     MOPUBErrorAdapterNotFound = 16,
     MOPUBErrorAdapterInvalid = 17,
-    MOPUBErrorAdapterHasNoInventory = 18
+    MOPUBErrorAdapterHasNoInventory = 18,
+    MOPUBErrorUnableToParseJSONAdResponse,
+    MOPUBErrorUnexpectedNetworkResponse,
+    MOPUBErrorHTTPResponseNot200,
+    MOPUBErrorNoNetworkData,
+    MOPUBErrorSDKNotInitialized,
+    MOPUBErrorSDKInitializationInProgress,
+    MOPUBErrorAdRequestTimedOut,
+    MOPUBErrorNoRenderer,
+    MOPUBErrorAdLoadAlreadyInProgress,
+    MOPUBErrorInvalidCustomEventClass,
+    MOPUBErrorJSONSerializationFailed,
+    MOPUBErrorUnableToParseAdResponse,
+    MOPUBErrorNoConsentDialogLoaded,
+    MOPUBErrorAdapterFailedToLoadAd,
+    MOPUBErrorFullScreenAdAlreadyOnScreen,
 } MOPUBErrorCode;
 
-@interface MOPUBError : NSError
+@interface NSError (MoPub)
 
-+ (MOPUBError *)errorWithCode:(MOPUBErrorCode)code;
++ (NSError *)errorWithCode:(MOPUBErrorCode)code;
++ (NSError *)errorWithCode:(MOPUBErrorCode)code localizedDescription:(NSString *)description;
 
+@end
+
+@interface NSError (Initialization)
++ (instancetype)sdkInitializationInProgress;
+@end
+
+@interface NSError (AdLifeCycle)
++ (instancetype)adAlreadyLoading;
++ (instancetype)customEventClass:(Class)customEventClass doesNotInheritFrom:(Class)baseClass;
++ (instancetype)networkResponseIsNotHTTP;
++ (instancetype)networkResponseContainedNoData;
++ (instancetype)adLoadFailedBecauseSdkNotInitialized;
++ (instancetype)serializationOfJson:(NSDictionary *)json failedWithError:(NSError *)serializationError;
++ (instancetype)adResponseFailedToParseWithError:(NSError *)serializationError;
++ (instancetype)adResponsesNotFound;
++ (instancetype)fullscreenAdAlreadyOnScreen;
+@end
+
+@interface NSError (Consent)
++ (instancetype)noConsentDialogLoaded;
 @end

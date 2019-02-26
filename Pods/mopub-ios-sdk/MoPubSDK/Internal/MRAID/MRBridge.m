@@ -1,17 +1,18 @@
 //
 //  MRBridge.m
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MRBridge.h"
 #import "MPConstants.h"
+#import "MPCoreInstanceProvider+MRAID.h"
 #import "MPLogging.h"
 #import "NSURL+MPAdditions.h"
 #import "MPGlobal.h"
 #import "MRBundleManager.h"
-#import "MPInstanceProvider.h"
 #import "UIWebView+MPAdditions.h"
 #import "MRError.h"
 #import "MRProperty.h"
@@ -28,12 +29,14 @@ static NSString * const kMraidURLScheme = @"mraid";
 
 @implementation MRBridge
 
-- (instancetype)initWithWebView:(MPWebView *)webView
+- (instancetype)initWithWebView:(MPWebView *)webView delegate:(id<MRBridgeDelegate>)delegate
 {
     if (self = [super init]) {
         _webView = webView;
         _webView.delegate = self;
-        _nativeCommandHandler = [[MPInstanceProvider sharedProvider] buildMRNativeCommandHandlerWithDelegate:self];
+        _nativeCommandHandler = [[MRNativeCommandHandler alloc] initWithDelegate:self];
+        _shouldHandleRequests = YES;
+        _delegate = delegate;
     }
 
     return self;
@@ -47,81 +50,88 @@ static NSString * const kMraidURLScheme = @"mraid";
 - (void)loadHTMLString:(NSString *)HTML baseURL:(NSURL *)baseURL
 {
     // Bail out if we can't locate mraid.js.
-    if (![self MRAIDScriptPath]) {
+    if (![[MPCoreInstanceProvider sharedProvider] isMraidJavascriptAvailable]) {
         NSError *error = [NSError errorWithDomain:MoPubMRAIDAdsSDKDomain code:MRErrorMRAIDJSNotFound userInfo:nil];
         [self.delegate bridge:self didFailLoadingWebView:self.webView error:error];
         return;
     }
 
     if (HTML) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Execute the javascript in the web view directly.
-            NSString *mraidString = [NSString stringWithContentsOfFile:[self MRAIDScriptPath] encoding:NSUTF8StringEncoding error:nil];
-
-            // Once done loading from the file, execute the javascript and load the html into the web view.
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.webView evaluateJavaScript:mraidString completionHandler:^(id result, NSError *error){
-                    [self.webView disableJavaScriptDialogs];
-                    [self.webView loadHTMLString:HTML baseURL:baseURL];
-                }];
-            });
+        // Execute the javascript in the web view directly.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.webView evaluateJavaScript:[[MPCoreInstanceProvider sharedProvider] mraidJavascript] completionHandler:^(id result, NSError *error){
+                [self.webView disableJavaScriptDialogs];
+                [self.webView loadHTMLString:HTML baseURL:baseURL];
+            }];
         });
     }
 }
 
 - (void)fireReadyEvent
 {
+    MPLogDebug(@"mraidbridge.fireReadyEvent()");
     [self executeJavascript:@"window.mraidbridge.fireReadyEvent();"];
 }
 
 - (void)fireChangeEventForProperty:(MRProperty *)property
 {
     NSString *JSON = [NSString stringWithFormat:@"{%@}", property];
+
+    MPLogDebug(@"mraidbridge.fireChangeEvent(%@)", JSON);
     [self executeJavascript:@"window.mraidbridge.fireChangeEvent(%@);", JSON];
-    MPLogTrace(@"JSON: %@", JSON);
 }
 
 - (void)fireChangeEventsForProperties:(NSArray *)properties
 {
     NSString *JSON = [NSString stringWithFormat:@"{%@}", [properties componentsJoinedByString:@", "]];
+
+    MPLogDebug(@"mraidbridge.fireChangeEvent(%@)", JSON);
     [self executeJavascript:@"window.mraidbridge.fireChangeEvent(%@);", JSON];
-    MPLogTrace(@"JSON: %@", JSON);
 }
 
 - (void)fireErrorEventForAction:(NSString *)action withMessage:(NSString *)message
 {
+    MPLogDebug(@"mraidbridge.fireErrorEvent('%@', '%@')", message, action);
     [self executeJavascript:@"window.mraidbridge.fireErrorEvent('%@', '%@');", message, action];
 }
 
 - (void)fireSizeChangeEvent:(CGSize)size
 {
+    MPLogDebug(@"mraidbridge.notifySizeChangeEvent(%.1f, %.1f)", size.width, size.height);
     [self executeJavascript:@"window.mraidbridge.notifySizeChangeEvent(%.1f, %.1f);", size.width, size.height];
 }
 
 - (void)fireSetScreenSize:(CGSize)size
 {
+    MPLogDebug(@"mraidbridge.setScreenSize(%.1f, %.1f)", size.width, size.height);
     [self executeJavascript:@"window.mraidbridge.setScreenSize(%.1f, %.1f);", size.width, size.height];
 }
 
 - (void)fireSetPlacementType:(NSString *)placementType
 {
+    MPLogDebug(@"mraidbridge.setPlacementType('%@')", placementType);
     [self executeJavascript:@"window.mraidbridge.setPlacementType('%@');", placementType];
 }
 
 - (void)fireSetCurrentPositionWithPositionRect:(CGRect)positionRect
 {
+    MPLogDebug(@"mraidbridge.setCurrentPosition(%.1f, %.1f, %.1f, %.1f)", positionRect.origin.x, positionRect.origin.y,
+              positionRect.size.width, positionRect.size.height);
     [self executeJavascript:@"window.mraidbridge.setCurrentPosition(%.1f, %.1f, %.1f, %.1f);", positionRect.origin.x, positionRect.origin.y,
      positionRect.size.width, positionRect.size.height];
 }
 
 - (void)fireSetDefaultPositionWithPositionRect:(CGRect)positionRect
 {
+    MPLogDebug(@"mraidbridge.setDefaultPosition(%.1f, %.1f, %.1f, %.1f)", positionRect.origin.x, positionRect.origin.y,
+              positionRect.size.width, positionRect.size.height);
     [self executeJavascript:@"window.mraidbridge.setDefaultPosition(%.1f, %.1f, %.1f, %.1f);", positionRect.origin.x, positionRect.origin.y,
      positionRect.size.width, positionRect.size.height];
 }
 
 - (void)fireSetMaxSize:(CGSize)maxSize
 {
+    MPLogDebug(@"mraidbridge.setMaxSize(%.1f, %.1f)", maxSize.width, maxSize.height);
     [self executeJavascript:@"window.mraidbridge.setMaxSize(%.1f, %.1f);", maxSize.width, maxSize.height];
 }
 
@@ -149,7 +159,7 @@ static NSString * const kMraidURLScheme = @"mraid";
                                    withString:@" "
                                       options:NSLiteralSearch
                                         range:NSMakeRange(0, [urlString length])];
-        MPLogDebug(@"Web console: %@", urlString);
+        MPLogEvent([MPLogEvent javascriptConsoleLogWithMessage:urlString]);
         return NO;
     }
 
@@ -204,12 +214,6 @@ static NSString * const kMraidURLScheme = @"mraid";
 
 #pragma mark - Private
 
-- (NSString *)MRAIDScriptPath
-{
-    MRBundleManager *bundleManager = [[MPInstanceProvider sharedProvider] buildMRBundleManager];
-    return [bundleManager mraidPath];
-}
-
 - (void)executeJavascript:(NSString *)javascript, ...
 {
     va_list args;
@@ -220,6 +224,7 @@ static NSString * const kMraidURLScheme = @"mraid";
 
 - (void)fireNativeCommandCompleteEvent:(NSString *)command
 {
+    MPLogDebug(@"mraidbridge.nativeCallComplete('%@')", command);
     [self executeJavascript:@"window.mraidbridge.nativeCallComplete('%@');", command];
 }
 

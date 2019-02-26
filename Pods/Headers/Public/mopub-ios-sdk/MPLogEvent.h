@@ -1,1 +1,1 @@
-../../../mopub-ios-sdk/MoPubSDK/Internal/Event Logging/MPLogEvent.h
+../../../mopub-ios-sdk/MoPubSDK/Logging/MPLogEvent.h

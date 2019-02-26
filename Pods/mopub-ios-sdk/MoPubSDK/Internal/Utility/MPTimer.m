@@ -1,9 +1,9 @@
 //
 //  MPTimer.m
-//  MoPub
 //
-//  Created by Andrew He on 3/8/11.
-//  Copyright 2011 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPTimer.h"
@@ -130,7 +130,7 @@
     self.pauseDate = [NSDate date];
     secondsLeft = [fireDate timeIntervalSinceDate:self.pauseDate];
     if (secondsLeft <= 0) {
-        MPLogWarn(@"An MPTimer was somehow paused after it was supposed to fire.");
+        MPLogInfo(@"An MPTimer was somehow paused after it was supposed to fire.");
     } else {
         MPLogDebug(@"Paused MPTimer (%p) %.1f seconds left before firing.", self, secondsLeft);
     }
@@ -154,7 +154,7 @@
         return NO;
     }
 
-    MPLogDebug(@"Resumed MPTimer (%p), should fire in %.1f seconds.", self.timeInterval);
+    MPLogDebug(@"Resumed MPTimer (%p), should fire in %.1f seconds.", self, self.timeInterval);
 
     // Resume the timer.
     NSDate *newFireDate = [NSDate dateWithTimeInterval:self.timeInterval sinceDate:[NSDate date]];

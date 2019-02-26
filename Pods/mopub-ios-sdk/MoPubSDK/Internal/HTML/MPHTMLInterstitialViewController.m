@@ -1,14 +1,15 @@
 //
 //  MPHTMLInterstitialViewController.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPHTMLInterstitialViewController.h"
 #import "MPWebView.h"
 #import "MPAdDestinationDisplayAgent.h"
-#import "MPInstanceProvider.h"
+#import "MPViewabilityTracker.h"
 
 @interface MPHTMLInterstitialViewController ()
 
@@ -36,8 +37,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor blackColor];
-    self.backingViewAgent = [[MPInstanceProvider sharedProvider] buildMPAdWebViewAgentWithAdWebViewFrame:self.view.bounds
-                                                                                                delegate:self];
+    self.backingViewAgent = [[MPAdWebViewAgent alloc] initWithAdWebViewFrame:self.view.bounds delegate:self];
 }
 
 #pragma mark - Public
@@ -48,10 +48,21 @@
     [self.backingViewAgent loadConfiguration:configuration];
 
     self.backingView = self.backingViewAgent.view;
+    [self.view addSubview:self.backingView];
     self.backingView.frame = self.view.bounds;
     self.backingView.autoresizingMask = UIViewAutoresizingFlexibleWidth |
     UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:self.backingView];
+    if (@available(iOS 11, *)) {
+        self.backingView.translatesAutoresizingMaskIntoConstraints = NO;
+        [NSLayoutConstraint activateConstraints:@[
+                                                  [self.backingView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+                                                  [self.backingView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+                                                  [self.backingView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+                                                  [self.backingView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+                                                  ]];
+    }
+
+    [self.backingViewAgent.viewabilityTracker registerFriendlyObstructionView:self.closeButton];
 }
 
 - (void)willPresentInterstitial
@@ -92,11 +103,14 @@
 
 #pragma mark - Autorotation
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        [self.backingViewAgent rotateToOrientation:orientation];
+     } completion:nil];
 
-    [self.backingViewAgent rotateToOrientation:self.interfaceOrientation];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - MPAdWebViewAgentDelegate

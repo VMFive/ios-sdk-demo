@@ -1,17 +1,19 @@
 //
 //  MPAdAlertManager.m
-//  MoPub
 //
-//  Copyright (c) 2013 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdAlertManager.h"
 #import "MPAdConfiguration.h"
 #import "MPAdAlertGestureRecognizer.h"
-#import "MPLogging.h"
-#import "MPIdentityProvider.h"
+#import "MPConstants.h"
 #import "MPCoreInstanceProvider.h"
+#import "MPIdentityProvider.h"
 #import "MPLastResortDelegate.h"
+#import "MPLogging.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <CoreLocation/CoreLocation.h>

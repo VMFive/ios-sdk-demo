@@ -1,12 +1,14 @@
 //
 //  MPInterstitialViewController.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPInterstitialViewController.h"
 
+#import "MPError.h"
 #import "MPGlobal.h"
 #import "MPLogging.h"
 #import "UIButton+MPAdditions.h"
@@ -45,12 +47,18 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
     self.view.backgroundColor = [UIColor blackColor];
 }
 
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return YES;
+}
+
 #pragma mark - Public
 
-- (void)presentInterstitialFromViewController:(UIViewController *)controller
+- (void)presentInterstitialFromViewController:(UIViewController *)controller complete:(void(^)(NSError *))complete
 {
     if (self.presentingViewController) {
-        MPLogWarn(@"Cannot present an interstitial that is already on-screen.");
+        if (complete != nil) {
+            complete(NSError.fullscreenAdAlreadyOnScreen);
+        }
         return;
     }
 
@@ -63,6 +71,9 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
     [controller presentViewController:self animated:MP_ANIMATED completion:^{
         [self didPresentInterstitial];
+        if (complete != nil) {
+            complete(nil);
+        }
     }];
 }
 
@@ -115,6 +126,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 - (void)layoutCloseButton
 {
+    [self.view addSubview:self.closeButton];
     CGFloat originX = self.view.bounds.size.width - kCloseButtonPadding -
     self.closeButton.bounds.size.width;
     self.closeButton.frame = CGRectMake(originX,
@@ -123,7 +135,13 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
                                         self.closeButton.bounds.size.height);
     self.closeButton.mp_TouchAreaInsets = UIEdgeInsetsMake(kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset, kCloseButtonEdgeInset);
     [self setCloseButtonStyle:self.closeButtonStyle];
-    [self.view addSubview:self.closeButton];
+    if (@available(iOS 11.0, *)) {
+        self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [NSLayoutConstraint activateConstraints:@[
+                                                  [self.closeButton.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:kCloseButtonPadding],
+                                                  [self.closeButton.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-kCloseButtonPadding],
+                                                  ]];
+    }
     [self.view bringSubviewToFront:self.closeButton];
 }
 
@@ -191,7 +209,6 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 #pragma mark - Autorotation (iOS 6.0 and above)
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= MP_IOS_6_0
 - (BOOL)shouldAutorotate
 {
     return YES;
@@ -223,7 +240,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
     // just return the application's supported orientations.
 
     if (!interstitialSupportedOrientations) {
-        MPLogError(@"Your application does not support this interstitial's desired orientation "
+        MPLogInfo(@"Your application does not support this interstitial's desired orientation "
                    @"(%@).", orientationDescription);
         return applicationSupportedOrientations;
     } else {
@@ -250,22 +267,6 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
         return UIInterfaceOrientationLandscapeLeft;
     } else {
         return UIInterfaceOrientationLandscapeRight;
-    }
-}
-#endif
-
-#pragma mark - Autorotation (before iOS 6.0)
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (_orientationType == MPInterstitialOrientationTypePortrait) {
-        return (interfaceOrientation == UIInterfaceOrientationPortrait ||
-                interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
-    } else if (_orientationType == MPInterstitialOrientationTypeLandscape) {
-        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-                interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-    } else {
-        return YES;
     }
 }
 

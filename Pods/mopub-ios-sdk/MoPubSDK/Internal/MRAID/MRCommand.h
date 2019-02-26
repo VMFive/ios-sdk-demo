@@ -1,8 +1,9 @@
 //
 //  MRCommand.h
-//  MoPub
 //
-//  Copyright (c) 2011 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <Foundation/Foundation.h>
@@ -12,9 +13,7 @@
 
 @protocol MRCommandDelegate <NSObject>
 
-- (void)mrCommand:(MRCommand *)command createCalendarEventWithParams:(NSDictionary *)params __deprecated;
 - (void)mrCommand:(MRCommand *)command playVideoWithURL:(NSURL *)url;
-- (void)mrCommand:(MRCommand *)command storePictureWithURL:(NSURL *)url __deprecated;
 - (void)mrCommand:(MRCommand *)command shouldUseCustomClose:(BOOL)useCustomClose;
 - (void)mrCommand:(MRCommand *)command setOrientationPropertiesWithForceOrientation:(UIInterfaceOrientationMask)forceOrientation;
 - (void)mrCommand:(MRCommand *)command openURL:(NSURL *)url;
@@ -81,18 +80,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface MRCreateCalendarEventCommand : MRCommand
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 @interface MRPlayVideoCommand : MRCommand
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@interface MRStorePictureCommand : MRCommand
 
 @end

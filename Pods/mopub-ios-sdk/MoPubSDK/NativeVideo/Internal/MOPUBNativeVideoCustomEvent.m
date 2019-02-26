@@ -1,8 +1,9 @@
 //
 //  MOPUBNativeVideoCustomEvent.m
-//  MoPubSDK
 //
-//  Copyright (c) 2015 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPNativeAd.h"
@@ -21,8 +22,9 @@
 
 - (void)handleSuccessfulVastParsing:(MPVASTResponse *)mpVastResponse info:(NSDictionary *)info
 {
+    NSString * adUnitId = info[kNativeAdUnitId];
     NSMutableDictionary *infoMutableCopy = [info mutableCopy];
-    [infoMutableCopy setObject:[[MPVideoConfig alloc] initWithVASTResponse:mpVastResponse additionalTrackers:((MOPUBNativeVideoAdConfigValues *)info[kNativeVideoAdConfigKey]).trackers] forKey:kVideoConfigKey];
+    [infoMutableCopy setObject:[[MPVideoConfig alloc] initWithVASTResponse:mpVastResponse additionalTrackers:((MOPUBNativeVideoAdConfigValues *)info[kNativeAdConfigKey]).trackers] forKey:kVideoConfigKey];
     MOPUBNativeVideoAdAdapter *adAdapter = [[MOPUBNativeVideoAdAdapter alloc] initWithAdProperties:infoMutableCopy];
     if (adAdapter.properties) {
         MPNativeAd *interfaceAd = [[MPNativeAd alloc] initWithAdAdapter:adAdapter];
@@ -33,43 +35,57 @@
         for (NSString *key in [info allKeys]) {
             if ([[key lowercaseString] hasSuffix:@"image"] && [[info objectForKey:key] isKindOfClass:[NSString class]]) {
                 if (![MPNativeAdUtils addURLString:[info objectForKey:key] toURLArray:imageURLs]) {
-                    [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForInvalidImageURL()];
+                    NSError * error = MPNativeAdNSErrorForInvalidImageURL();
+                    MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
+                    [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
                 }
             }
         }
 
         [super precacheImagesWithURLs:imageURLs completionBlock:^(NSArray *errors) {
             if (errors) {
-                MPLogDebug(@"%@", errors);
-                [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForImageDownloadFailure()];
+                NSError * error = MPNativeAdNSErrorForImageDownloadFailure();
+                MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
+                [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
             } else {
+                MPLogAdEvent([MPLogEvent adLoadSuccessForAdapter:NSStringFromClass(self.class)], adUnitId);
                 [self.delegate nativeCustomEvent:self didLoadAd:interfaceAd];
             }
         }];
     } else {
-        [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForInvalidAdServerResponse(nil)];
+        NSError * error = MPNativeAdNSErrorForInvalidAdServerResponse(nil);
+        MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
+        [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
     }
 }
 
 - (void)requestAdWithCustomEventInfo:(NSDictionary *)info
 {
-    MOPUBNativeVideoAdConfigValues *nativeVideoAdConfigValues = [info objectForKey:kNativeVideoAdConfigKey];
+    NSString * adUnitId = info[kNativeAdUnitId];
+    MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(self.class) dspCreativeId:info[kNativeAdDspCreativeId] dspName:info[kNativeAdDspName]], adUnitId);
+
+    MOPUBNativeVideoAdConfigValues *nativeVideoAdConfigValues = [info objectForKey:kNativeAdConfigKey];
     if (nativeVideoAdConfigValues && [nativeVideoAdConfigValues isValid]) {
         NSString *vastString = [info objectForKey:kVASTVideoKey];
         if (vastString) {
             [MPVASTManager fetchVASTWithData:[vastString dataUsingEncoding:NSUTF8StringEncoding]
                                   completion: ^(MPVASTResponse *mpVastResponse, NSError *error) {
                                       if (error) {
+                                          MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
                                           [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForVASTParsingFailure()];
                                       } else {
                                           [self handleSuccessfulVastParsing:mpVastResponse info:info];
                                       }
                                   }];
         } else {
-            [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForVASTParsingFailure()];
+            NSError * error = MPNativeAdNSErrorForVASTParsingFailure();
+            MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
+            [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
         }
     } else {
-        [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:MPNativeAdNSErrorForVideoConfigInvalid()];
+        NSError * error = MPNativeAdNSErrorForVideoConfigInvalid();
+        MPLogAdEvent([MPLogEvent adLoadFailedForAdapter:NSStringFromClass(self.class) error:error], adUnitId);
+        [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];
     }
 }
 

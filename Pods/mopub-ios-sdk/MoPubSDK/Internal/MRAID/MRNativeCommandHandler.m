@@ -1,14 +1,14 @@
 //
 //  MRNativeCommandHandler.m
-//  MoPubSDK
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MRNativeCommandHandler.h"
 #import "MRCommand.h"
 #import "MPGlobal.h"
-#import "MPInstanceProvider.h"
 #import "MPLogging.h"
 #import "MRVideoPlayerManager.h"
 
@@ -27,7 +27,7 @@
     if (self) {
         _delegate = delegate;
 
-        _videoPlayerManager = [[MPInstanceProvider sharedProvider] buildMRVideoPlayerManagerWithDelegate:self];
+        _videoPlayerManager = [[MRVideoPlayerManager alloc] initWithDelegate:self];
     }
 
     return self;
@@ -66,19 +66,9 @@
 
 #pragma mark - MRCommandDelegate
 
-- (void)mrCommand:(MRCommand *)command createCalendarEventWithParams:(NSDictionary *)params
-{
-    // DEPRECATED
-}
-
 - (void)mrCommand:(MRCommand *)command playVideoWithURL:(NSURL *)url
 {
     [self.videoPlayerManager playVideo:url];
-}
-
-- (void)mrCommand:(MRCommand *)command storePictureWithURL:(NSURL *)url
-{
-    // DEPRECATED
 }
 
 - (void)mrCommand:(MRCommand *)command shouldUseCustomClose:(BOOL)useCustomClose
